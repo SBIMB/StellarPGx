@@ -1,0 +1,8 @@
+2021-04-17 12:01:43	1.9s	awesome_booth	ERR	1ff19f221ceb8e845544b06c1db79a20	37abcf94-a00a-41e1-9980-f4698565d8df	nextflow run test1.nf -profile slurm
+2021-04-17 12:09:10	2.3s	kickass_varahamihira	OK	ebce3b511da0333435c86a272b2e8823	2d87ddbe-4e3d-4f46-b91b-fcae69063401	nextflow run test1.nf -profile slurm
+2021-04-17 12:10:26	-	stupefied_bhabha	-	de93998810b669ffda830c25f9180c2f	01cbb0a7-1cac-48d4-8292-36139cef2267	nextflow run test1.nf -profile slurm
+2021-04-17 12:10:51	1.9s	cheeky_sammet	OK	1ebf6473e841de41c038606d55d2a8f9	c030eb46-41a1-4aee-96ae-6028374983ea	nextflow run test1.nf -profile slurm
+2021-04-17 12:11:32	2.3s	irreverent_stone	OK	03ebd48ac0f9e009806e9628a40f55ea	5555dcf8-8270-4c3d-be5b-435dbf47ec54	nextflow run test1.nf -profile slurm
+2021-04-17 12:13:23	2.2s	angry_nobel	OK	cffe10796ec774efb0461d04d5d0bd86	19b90711-6e3a-463d-ae3c-dcf3ba043541	nextflow run test1.nf -profile slurm
+2021-04-17 12:14:19	2.1s	sad_shannon	OK	04d46f755ae3c2f131189b5454a3dc41	0f0c2aba-5820-46a9-a20d-f4d6556a92a0	nextflow run test1.nf -profile slurm
+2021-04-17 12:16:58	2s	berserk_hopper	OK	68fa7006c24653b96fbdf814b6f66f11	77fd05c3-d3f9-422a-93c5-19082763b92e	nextflow run test1.nf -profile slurm
