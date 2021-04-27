@@ -6,8 +6,6 @@ d_base = params.db_init
 res_base = params.res_init
 caller_base = params.caller_init
 output_folder = params.out_dir
-// gdf_file = params.gdf
-h_scripts = params.handy_scripts
 
 params.build='hg38'
 
@@ -342,7 +340,7 @@ if (params.format=='compressed') {
 
 // align_file.into { data1; data2; data3; data4; data5 }
 
-depth_cov = Channel.fromPath(params.in_depth, type: 'file') { file -> file.simpleName }
+depth_cov = Channel.fromPath(params.in_depth, type: 'file')
 
 in_var_ch = Channel.fromFilePairs(params.in_vcf, type: 'file') { file -> file.simpleName }
 
@@ -601,7 +599,7 @@ process get_depth {
 //   maxForks 10
 
     input:
-    set val(name), file(sam_dp) from depth_cov
+    file(sam_dp) from depth_cov
     // path ref_dir from Channel.value("${ref_dir_val}")
     path res_dir
 
@@ -609,9 +607,10 @@ process get_depth {
     set val(name), file("${name}_${gene_name}_ctrl.depth") into sv_ch3
 
     script:
+    name = sam_dp.simpleName
 
     """   
-    python3 ${h_scripts}/depth_cov/get_depth_cov.py ${res_dir}/test3_vcf_depth.bed ${sam_dp} > ${name}_${gene_name}_ctrl.depth 
+    python3 ${caller_base}/depth_cov/get_depth_cov.py ${res_dir}/test3_vcf_depth.bed ${sam_dp} > ${name}_${gene_name}_ctrl.depth 
     """
 
 }
@@ -659,17 +658,17 @@ process format_input_snvs {
     // publishDir "$output_folder/$gene_name/variants", pattern: '*vcf.gz.tbi', mode: 'copy', overwrite: 'true'
 
     input:
-    set val(name), file(variants) from in_var_ch
+    set val(name), file(variants) from data1
 
     output:
     set val(name), path("${name}_var") into (var_norm1, var_norm2)
 
     script:
     """
-	bcftools view -r ${region_b2} ${variants.get(2)} | bgzip -c > ${name}_${region_b2}.vcf.gz
-	tabix ${name}_${region_b2}.vcf.gz
+	bcftools view -r ${region_b1} ${variants.get(0)} | bgzip -c > ${name}_${gene_name}_region.vcf.gz
+	tabix ${name}_${gene_name}_region.vcf.gz
 	mkdir ${name}_var
-        bcftools norm -m - ${name}_${region_b2}.vcf.gz | bcftools view -e 'GT="1/0"' | bcftools view -e 'GT="0/0"' | bgzip -c > ${name}_var/${name}_all_norm.vcf.gz
+        bcftools norm -m - ${name}_${gene_name}_region.vcf.gz | bcftools view -e 'GT="1/0"' | bcftools view -e 'GT="0/0"' | bgzip -c > ${name}_var/${name}_all_norm.vcf.gz
         tabix ${name}_var/${name}_all_norm.vcf.gz
         
     """
@@ -722,8 +721,7 @@ process analyse_1 {
 
 }
 
-// bcftools query -f'%ID\t%ALT\t[\t%GT\t%DP]\t%INFO/ABHet\t%INFO/ABHom\n' ${name}_gene_del/${chrom}/${region_a2}.v\
-cf.gz > ${name}_gene_del/${name}_gene_del_summary.txt
+// bcftools query -f'%ID\t%ALT\t[\t%GT\t%DP]\t%INFO/ABHet\t%INFO/ABHom\n' ${name}_gene_del/${chrom}/${region_a2}.vcf.gz > ${name}_gene_del/${name}_gene_del_summary.txt
 
 // sv_ch2.join(core_vars1).set {dup_int}
 
@@ -737,19 +735,19 @@ process analyse_2 {
     set val(name), path("${name}_int") from core_vars1
 
     output:
-    set val(name), path("${name}_gene_dup_summary.txt") into dup_ch
+    set val(name), file("${name}_gene_dup_summary.txt") into dup_ch
 
     script:
 
     """
-    bcftools query -f'%POS~%REF>%ALT\t[\t%GT\t%DP]\n' -i'GT="alt"' ${name}_int/${name}_core.vcf.gz > ${name}_gene_dup_summary.txt
-
+    bcftools query -f'%POS~%REF>%ALT\t[%GT\t%DP\t%AD]\n' -i'GT="alt"' ${name}_int/${name}_core.vcf.gz > ${name}_gene_dup_summary.int
+    python3 ${caller_base}/depth_cov/get_allele_ratio.py ${name}_gene_dup_summary.int > ${name}_gene_dup_summary.txt
+    rm ${name}_gene_dup_summary.int
     """
 
 }
 
-// bcftools query -f'%POS~%REF>%ALT\t[\t%GT\t%DP]\t%INFO/ABHet\t%INFO/ABHom\n' -i'GT="alt"' ${name}_gene_dup/${chr\
-om}/${region_a2}.vcf.gz > ${name}_gene_dup/${name}_gene_dup_summary.txt
+// bcftools query -f'%POS~%REF>%ALT\t[\t%GT\t%DP]\t%INFO/ABHet\t%INFO/ABHom\n' -i'GT="alt"' ${name}_gene_dup/${chrom}/${region_a2}.vcf.gz > ${name}_gene_dup/${name}_gene_dup_summary.txt
 
 var_norm2.join(core_vars2).set {dip_req}
 
@@ -774,8 +772,7 @@ process analyse_3 {
 
 }
 
-// set val(name), path("${name}_vars/${name}_core_snvs.dip"), path("${name}_vars/${name}_full.dip"), path("${name}\
-_vars/${name}_gt.dip") into prep_ch
+// set val(name), path("${name}_vars/${name}_core_snvs.dip"), path("${name}_vars/${name}_full.dip"), path("${name}_vars/${name}_gt.dip") into prep_ch
 
 prep_ch.join(del_ch).set {fin_files1}
 fin_files1.join(dup_ch).set {fin_files2}
@@ -791,7 +788,7 @@ process call_stars {
     tag "${name}"
 
     input:
-    set val(name), path("${name}_vars/${name}_core_snvs.dip"), path("${name}_vars/${name}_full.dip"), path("${name}_vars/${name}_gt.dip"), path("${name}_gene_del/${name}_gene_del_summary.txt"), path("${name}_gene_dup/${name}_gene_dup_summary.txt"), file("${name}_${gene_name}_dp") from fin_files
+    set val(name), path("${name}_vars/${name}_core_snvs.dip"), path("${name}_vars/${name}_full.dip"), path("${name}_vars/${name}_gt.dip"), file("${name}_gene_del_summary.txt"), file("${name}_gene_dup_summary.txt"), file("${name}_${gene_name}_dp") from fin_files
     path db
     path caller_dir
 
@@ -801,7 +798,7 @@ process call_stars {
     script:
    
     """
-    python3 ${caller_dir}/stellarpgx_vcf_depth.py ${db}/diplo_db_debugged2.dbs ${name}_vars/${name}_core_snvs.dip ${name}_vars/${name}_full.dip ${name}_vars/${name}_gt.dip ${db}/genotypes4.dbs ${name}_gene_del/${name}_gene_del_summary.txt ${name}_gene_dup/${name}_gene_dup_summary.txt ${name}_${gene_name}_dp ${db}/haps_var_new.dbs ${db}/a_scores.dbs > ${name}_${gene_name}.alleles  
+    python3 ${caller_dir}/stellarpgx_vcf_depth.py ${db}/diplo_db_debugged2.dbs ${name}_vars/${name}_core_snvs.dip ${name}_vars/${name}_full.dip ${name}_vars/${name}_gt.dip ${db}/genotypes4.dbs ${name}_gene_del_summary.txt ${name}_gene_dup_summary.txt ${name}_${gene_name}_dp ${db}/haps_var_new.dbs ${db}/a_scores.dbs > ${name}_${gene_name}.alleles  
 
     """
 

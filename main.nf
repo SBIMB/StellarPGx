@@ -677,7 +677,7 @@ process analyse_1 {
     script:
 
     """
-    bcftools query -f'%ID\t%ALT\t[\t%GT\t%DP]\t%INFO/ABHet\t%INFO/ABHom\n' ${name}_gene_del/${chrom}/${region_a2}.vcf.gz > ${name}_gene_del/${name}_gene_del_summary.txt
+    bcftools query -f'%ID\t%ALT\t[%GT\t%DP]\t%INFO/ABHet\t%INFO/ABHom\n' ${name}_gene_del/${chrom}/${region_a2}.vcf.gz > ${name}_gene_del/${name}_gene_del_summary.txt
     """
 
 }
@@ -700,8 +700,8 @@ process analyse_2 {
     script:
 
     """
-    bcftools query -f'%POS~%REF>%ALT\t[\t%GT\t%DP]\t%INFO/ABHet\t%INFO/ABHom\n' -i'GT="alt"' ${name}_gene_dup/${chrom}/${region_a2}.vcf.gz > ${name}_gene_dup/${name}_gene_dup_summary.txt
-    bcftools query -f'%POS~%REF>%ALT\t[\t%GT\t%DP]\t%INFO/ABHet\t%INFO/ABHom\n' -i'GT="alt"' ${name}_int/${name}_core.vcf.gz >> ${name}_gene_dup/${name}_gene_dup_summary.txt
+    bcftools query -f'%POS~%REF>%ALT\t[%GT\t%DP]\t%INFO/ABHet\t%INFO/ABHom\n' -i'GT="alt"' ${name}_gene_dup/${chrom}/${region_a2}.vcf.gz > ${name}_gene_dup/${name}_gene_dup_summary.txt
+    bcftools query -f'%POS~%REF>%ALT\t[%GT\t%DP]\t%INFO/ABHet\t%INFO/ABHom\n' -i'GT="alt"' ${name}_int/${name}_core.vcf.gz >> ${name}_gene_dup/${name}_gene_dup_summary.txt
 
     """
 
