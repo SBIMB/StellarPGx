@@ -1128,33 +1128,36 @@ def cand_snv_allele_calling(database, infile, infile_full, infile_full_gt, infil
                     result_dip = hap1 + "/" + hap2
                     return [soln_list1, elem, result_dip];
 
-            elif soln_list1[0] == "139.v1_4.v1" and soln_list1[1] == "1.v1_4.v7" and soln_list1[2] == "4.v13_74.v1":
-                elem = "139.v1_4.v1"
-                res1 = [i for i in range(len(elem)) if elem.startswith("_", i)]
-                res2 = [i for i in range(len(elem)) if elem.startswith(".", i)]
-                hap1 = "*" + str (elem[:res2[0]])
-                hap2 = "*" + str (elem[res1[0]+1:res2[1]])
-                result_dip = hap1 + "/" + hap2
-                return [soln_list1, elem, result_dip];
-
 
             elif chkList(score) == "Equal":
-                amb_soln_set = []
-                for elem in tiebreak1:
+
+                if soln_list1[0] == "139.v1_4.v1" and soln_list1[1] == "1.v1_4.v7" and soln_list1[2] == "4.v13_74.v1":
+                    elem = "139.v1_4.v1"
                     res1 = [i for i in range(len(elem)) if elem.startswith("_", i)]
                     res2 = [i for i in range(len(elem)) if elem.startswith(".", i)]
                     hap1 = "*" + str (elem[:res2[0]])
                     hap2 = "*" + str (elem[res1[0]+1:res2[1]])
                     result_dip = hap1 + "/" + hap2
-                    amb_soln_set.append(result_dip)
-
-                if amb_soln_set[0] != amb_soln_set[1]:
-                    allele_res = " or ".join(amb_soln_set)
+                    return [soln_list1, elem, result_dip];
 
                 else:
-                    allele_res = amb_soln_set[0]
 
-                return [soln_list1, soln_list1, allele_res];
+                    amb_soln_set = []
+                    for elem in tiebreak1:
+                        res1 = [i for i in range(len(elem)) if elem.startswith("_", i)]
+                        res2 = [i for i in range(len(elem)) if elem.startswith(".", i)]
+                        hap1 = "*" + str (elem[:res2[0]])
+                        hap2 = "*" + str (elem[res1[0]+1:res2[1]])
+                        result_dip = hap1 + "/" + hap2
+                        amb_soln_set.append(result_dip)
+
+                    if amb_soln_set[0] != amb_soln_set[1]:
+                        allele_res = " or ".join(amb_soln_set)
+
+                    else:
+                        allele_res = amb_soln_set[0]
+
+                    return [soln_list1, soln_list1, allele_res];
 
 
             else:
