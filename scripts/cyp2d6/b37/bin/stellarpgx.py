@@ -415,10 +415,10 @@ elif (int(cn) == 3 or int(cn) == 4) and snv_def_alleles != None:
                         pass
 
                     elif test_13_2_v1 == 'hyb_13_2':
-                        phased_dup = phased_dup[b_ind2] + "/" + '*13+*2'
+                        phased_dup = phased_dup1[b_ind2] + "/" + '*13+*2'
 
                     elif test_13_2_v2 == 'hyb_13_2_v2':
-                        phased_dup = phased_dup[b_ind2] + "/" + '*13'
+                        phased_dup = phased_dup1[b_ind2] + "/" + '*13'
 
 
 
@@ -438,10 +438,10 @@ elif (int(cn) == 3 or int(cn) == 4) and snv_def_alleles != None:
                         pass
 
                     elif test_13_2_v1 == 'hyb_13_2':
-                        phased_dup = phased_dup[b_ind2] + "/" + '*13+*2'
+                        phased_dup = phased_dup1[b_ind2] + "/" + '*13+*2'
 
                     elif test_13_2_v2 == 'hyb_13_2_v2':
-                        phased_dup = phased_dup[b_ind2] + "/" + '*13+*2'
+                        phased_dup = phased_dup1[b_ind2] + "/" + '*13+*2'
 
 
 
@@ -551,10 +551,10 @@ elif (int(cn) == 3 or int(cn) == 4) and snv_def_alleles != None:
                         pass
 
                     elif test_13_2_v1 == 'hyb_13_2':
-                        phased_dup = phased_dup[b_ind2] + "/" + '*13+*2'
+                        phased_dup = phased_dup1[b_ind2] + "/" + '*13+*2'
 
                     elif test_13_2_v2 == 'hyb_13_2_v2':
-                        phased_dup = phased_dup[b_ind2] + "/" + '*13+*2'
+                        phased_dup = phased_dup1[b_ind2] + "/" + '*13+*2'
 
 
 
