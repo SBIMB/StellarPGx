@@ -334,6 +334,30 @@ elif (int(cn) == 3 or int(cn) == 4) and snv_def_alleles != None:
                 elif count1 == 2:
                     pass
 
+            if '*4x3' in phased_dup1:
+                count1 = phased_dup1.count('*4x3')
+                a_ind1 = phased_dup1.index('*4x3')
+                a_ind2 = 1 - a_ind1
+                other_hap = phased_dup1[a_ind2]
+
+                if count1 == 1:
+
+                    test_68 = hybrid_test_68(sv_dup, cn, av_cov, cn_in1_3pr, in_list)
+
+                    if test_68 == 'norm_dup':
+                        pass
+                    elif test_68 == 'hyb_68':
+                        if int(cn_in1_3pr) < int(cn):
+                            phased_dup = phased_dup.replace('*4x3', '*68+*4')
+
+                        elif int(cn_in1_3pr) == int(cn) and 'x' not in other_hap:
+                            phased_dup = phased_dup.replace('*4x3', '*68+*4')
+                           # phased_dup = phased_dup.replace(other_hap, (other_hap + 'x2'))
+
+                elif count1 == 2:
+                    pass
+
+
             if '*10x2' in phased_dup1:
                 count2 = phased_dup1.count('*10x2')
                 b_ind1 = phased_dup1.index('*10x2')
