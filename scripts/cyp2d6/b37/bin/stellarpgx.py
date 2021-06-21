@@ -341,7 +341,6 @@ elif (int(cn) == 3 or int(cn) == 4) and snv_def_alleles != None:
                 elif count1 == 2:
                     pass
 
-
             if '*4x3' in phased_dup1:
                 count1 = phased_dup1.count('*4x3')
                 a_ind1 = phased_dup1.index('*4x3')

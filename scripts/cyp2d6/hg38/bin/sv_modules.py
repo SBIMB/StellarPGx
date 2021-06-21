@@ -222,7 +222,7 @@ def dup_test_cn_3_4(sv_dup, hap_dbs, cand_allele1, cand_allele2, test_allele1, t
         res_dip =  allele_cn_list[0] + "/" + allele_cn_list[2] + "x" + str(3)
 
 
-    else:
+    else:            
         res_dip = 'check'
 
     return res_dip

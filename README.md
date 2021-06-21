@@ -101,7 +101,7 @@ nextflow run main.nf -profile slurm,test
 
 ### Step 3 - Expected output
 
-The expected output file (SIM001_2d6.alleles) for test dataset SIM001.bam will be found in the `./results` directory. It should contain the following; 
+The expected output file (SIM001_2d6.alleles) for test dataset SIM001.bam will be found in the `./results/cyp2d6/alleles` directory. It should contain the following; 
 
 ```
 --------------------------------------------

@@ -102,11 +102,10 @@ if (params.build=='b37') {
 
     } else if (params.gene=='cypor') {
        chrom = "7"
-       region_a1 = "7:75540000-75617500"
-       region_a2 = "075540000-075617500"
-       region_b1 = "7:75583350-75615800"
-       region_b2 = "075583350-075615800"
-
+       region_a1 = "7:75534473-75626173"
+       region_a2 = "075534473-075626173"
+       region_b1 = "7:75549473-75621173"
+       region_b2 = "075549473-075621173"
     }
 
 
@@ -207,10 +206,10 @@ if (params.build=='b37') {
 
     } else if (params.gene=='cypor') {
        chrom = "chr7"
-       region_a1 = "7:75540000-75617500"
-       region_a2 = "075540000-075617500"
-       region_b1 = "7:75583350-75615800"
-       region_b2 = "075583350-075615800"
+       region_a1 = "chr7:75534473-75626173"
+       region_a2 = "075534473-075626173"
+       region_b1 = "chr7:75549473-75621173"
+       region_b2 = "075549473-075621173"
 
     }
 
@@ -309,10 +308,10 @@ if (params.build=='b37') {
 
     } else if (params.gene=='cypor') {
        chrom = "chr7"
-       region_a1 = "chr7:75913370-75989900"
-       region_a2 = "075913370-075989900"
-       region_b1 = "chr7:75954050-75986500"
-       region_b2 = "075954050-075986500"
+       region_a1 = "chr7:75905155-75996855"
+       region_a2 = "075905155-075996855"
+       region_b1 = "chr7:75910155-75991855"
+       region_b2 = "075910155-075991855"
 
     }
 
@@ -419,9 +418,9 @@ process call_snvs1 {
             """
             graphtyper genotype ${ref_dir}/${ref_genome} --sam=${name}.${ext} --sams_index=<(echo ${name}.${sam_ind}) --region=${region_a1} --output=${name}_var_1 --prior_vcf=${res_dir}/common_plus_core_var.vcf.gz -a ${debug38} ${cram_options}
 
-            bcftools concat ${name}_var_1/chr7/075913370-075963369.vcf.gz ${name}_var_1/chr7/075963370-075989900.vcf.gz -Oz -o ${name}_var_1/chr7/075913370-075989900.vcf.gz
+            bcftools concat ${name}_var_1/chr7/075905155-075955154.vcf.gz ${name}_var_1/chr7/075955155-075996855.vcf.gz -Oz -o ${name}_var_1/chr7/075905155-075996855.vcf.gz
 
-            tabix ${name}_var_1/chr7/075913370-075989900.vcf.gz
+            tabix ${name}_var_1/chr7/075905155-075996855.vcf.gz
             """
 
 
@@ -506,9 +505,9 @@ process call_snvs2 {
             """
             graphtyper genotype ${ref_dir}/${ref_genome} --sam=${name}.${ext} --sams_index=<(echo ${name}.${sam_ind}) --region=${region_a1} --output=${name}_var_2 --prior_vcf=${res_dir}/common_plus_core_var.vcf.gz -a ${debug38} ${cram_options}
 
-            bcftools concat ${name}_var_2/chr7/075913370-075963369.vcf.gz ${name}_var_2/chr7/075963370-075989900.vcf.gz -Oz -o ${name}_var_2/chr7/075913370-075989900.vcf.gz
+            bcftools concat ${name}_var_2/chr7/075905155-075955154.vcf.gz ${name}_var_2/chr7/075955155-075996855.vcf.gz -Oz -o ${name}_var_2/chr7/075905155-075996855.vcf.gz
 
-            tabix ${name}_var_2/chr7/075913370-075989900.vcf.gz
+            tabix ${name}_var_2/chr7/075905155-075996855.vcf.gz
             """
 
     else
