@@ -154,46 +154,7 @@ def cand_snv_allele_calling(database, infile, infile_full, infile_full_gt, infil
             min_score = min(score)    
 
 
-            if chkList(score) == "Equal" and soln_list1[0] == "16A.v1_18B.v1":
-                elem = "16A.v1_18B.v1"
-                res1 = [i for i in range(len(elem)) if elem.startswith("_", i)]
-                res2 = [i for i in range(len(elem)) if elem.startswith(".", i)]
-                hap1 = "*" + str (elem[:res2[0]])
-                hap2 = "*" + str (elem[res1[0]+1:res2[1]])
-                result_dip = hap1 + "/" + hap2
-                return [soln_list1, elem, result_dip];
-
-
-            elif chkList(score) == "Equal" and soln_list1[0] == "16A.v1_1G.v1":
-                elem = "16A.v1_1G.v1"
-                res1 = [i for i in range(len(elem)) if elem.startswith("_", i)]
-                res2 = [i for i in range(len(elem)) if elem.startswith(".", i)]
-                hap1 = "*" + str (elem[:res2[0]])
-                hap2 = "*" + str (elem[res1[0]+1:res2[1]])
-                result_dip = hap1 + "/" + hap2
-                return [soln_list1, elem, result_dip];
-
-
-            elif chkList(score) == "Equal" and soln_list1[0] == "18A.v1_1G.v1":
-                elem = "18A.v1_1G.v1"
-                res1 = [i for i in range(len(elem)) if elem.startswith("_", i)]
-                res2 = [i for i in range(len(elem)) if elem.startswith(".", i)]
-                hap1 = "*" + str (elem[:res2[0]])
-                hap2 = "*" + str (elem[res1[0]+1:res2[1]])
-                result_dip = hap1 + "/" + hap2
-                return [soln_list1, elem, result_dip];
-
-            elif chkList(score) == "Equal" and soln_list1[0] == "1B.v1_1G.v1":
-                elem = "1B.v1_1G.v1"
-                res1 = [i for i in range(len(elem)) if elem.startswith("_", i)]
-                res2 = [i for i in range(len(elem)) if elem.startswith(".", i)]
-                hap1 = "*" + str (elem[:res2[0]])
-                hap2 = "*" + str (elem[res1[0]+1:res2[1]])
-                result_dip = hap1 + "/" + hap2
-                return [soln_list1, elem, result_dip];
-
-
-            elif chkList(score) == "Equal":
+            if chkList(score) == "Equal":
                 amb_soln_set = []
                 for elem in soln_list1:
                     res1 = [i for i in range(len(elem)) if elem.startswith("_", i)]
@@ -323,17 +284,8 @@ def cand_snv_allele_calling(database, infile, infile_full, infile_full_gt, infil
 
             min_score = min(score)
 
-            if chkList(score) == "Equal" and soln_list1[0] == "15B.v1_1G.v1":
-                elem = "15B.v1_1G.v1"
-                res1 = [i for i in range(len(elem)) if elem.startswith("_", i)]
-                res2 = [i for i in range(len(elem)) if elem.startswith(".", i)]
-                hap1 = "*" + str (elem[:res2[0]])
-                hap2 = "*" + str (elem[res1[0]+1:res2[1]])
-                result_dip = hap1 + "/" + hap2
-                return [soln_list1, elem, result_dip];
-
         
-            elif chkList(score) == "Equal":
+            if chkList(score) == "Equal":
                 amb_soln_set = []
                 for elem in tiebreak1:
                     res1 = [i for i in range(len(elem)) if elem.startswith("_", i)]
