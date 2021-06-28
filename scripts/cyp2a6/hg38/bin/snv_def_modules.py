@@ -219,11 +219,14 @@ def cand_snv_allele_calling(database, infile, infile_full, infile_full_gt, infil
                         if format_allele(i) == alt_solns[0]:
                             diplo1 = i
 
-                    return[soln_list1, diplo1, alt_solns[0]];
+                    return [soln_list1, diplo1, alt_solns[0]];
 
                 elif chkList(alt_solns) != "Equal" and alt_solns[0] == '*10/*1B10':
-                    return[soln_list1, ['10.v1_1.v1'], '*10/*1'];
-                    
+                    return [soln_list1, ['10.v1_1.v1'], '*10/*1'];
+                
+                elif chkList(alt_solns) != "Equal" and alt_solns[0] == '*18B/*1B10':
+                    return [soln_list1, ['18.v1_1.v1'], '*18/*1'];
+
                 else:
                     alt_solns = sorted(alt_solns)
                     amb_soln_set.append(alt_solns[0])
