@@ -302,10 +302,10 @@ def dup_test_cn_n(sv_dup, hap_dbs, cand_allele1, cand_allele2, test_allele1, tes
 
 def hybrid_12_test1(cov_e1_e2, cov_e3_e9):
 
-    if 0.85 < float(cov_e1_e2)/float(cov_e3_e9) < 1.2:
+    if 0.65 < float(cov_e1_e2)/float(cov_e3_e9) < 1.25:
         return 'norm_var'
 
-    elif 0.45 < float(cov_e1_e2)/float(cov_e3_e9) < 0.75:
+    elif 0.15 < float(cov_e1_e2)/float(cov_e3_e9) < 0.65:
         return 'hyb_12'
 
     elif float(cov_e1_e2)/float(cov_e3_e9) < 0.15:
