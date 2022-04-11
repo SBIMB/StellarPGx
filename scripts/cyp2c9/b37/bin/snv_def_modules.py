@@ -118,6 +118,16 @@ def cand_snv_allele_calling(database, infile, infile_full, infile_full_gt, infil
         #print ("\n" + core_variants + "\n")
 
 
+    elif len(soln_list1) == 2 and (soln_list1[0] == soln_list1[1]) :
+        diplo = soln_list1[0]
+        res1 = [i for i in range(len(diplo)) if diplo.startswith("_", i)]
+        res2 = [i for i in range(len(diplo)) if diplo.startswith(".", i)]
+        hap1 = "*" + str (diplo[:res2[0]])
+        hap2 = "*" + str (diplo[res1[0]+1:res2[1]])
+        allele_res = hap1 + "/" + hap2
+        return [soln_list1[0], diplo, allele_res];
+
+
     elif len(soln_list1) == 2:
         print(soln_list1)
         diplo1 = soln_list1[0]

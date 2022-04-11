@@ -17,6 +17,7 @@ def get_total_CN(cov_file):
     av_egfr_cov = float(all_reg[2][3])/(float(all_reg[2][2]) - float(all_reg[2][1]))
     av_e1_e2 = float(all_reg[3][3])/(float(all_reg[3][2]) - float(all_reg[3][1]))
     av_e3_e9 = float(all_reg[4][3])/(float(all_reg[4][2]) - float(all_reg[4][1]))
+    av_3p_utr = float(all_reg[5][3])/(float(all_reg[5][2]) - float(all_reg[5][1]))
 
     av_ctrl_cov = (av_vdr_cov + av_egfr_cov)/2
 
@@ -25,7 +26,7 @@ def get_total_CN(cov_file):
     total_cn = round(temp_cn)
 
 
-    return [str(int(total_cn)), round(av_2a6_cov), round(av_ctrl_cov), str(av_e1_e2), str(av_e3_e9)];
+    return [str(int(total_cn)), round(av_2a6_cov), round(av_ctrl_cov), str(av_e1_e2), str(av_e3_e9), str(av_3p_utr)];
 
 
 def del_test(sv_del):
@@ -313,3 +314,16 @@ def hybrid_12_test1(cov_e1_e2, cov_e3_e9):
 
     else:
         return 'norm_var'
+
+
+
+def star_1b_test(cov_3p_utr, cov_ctrl):
+
+    if float(cov_3p_utr)/float(cov_ctrl) < 0.25:
+        return 'hom_1B'
+
+    elif float(cov_3p_utr)/float(cov_ctrl) > 0.65:
+        return 'no_1B'
+    
+    else:
+        return 'het_1B'

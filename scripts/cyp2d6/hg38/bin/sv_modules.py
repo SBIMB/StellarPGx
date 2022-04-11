@@ -328,10 +328,15 @@ def dup_test_cn_n(sv_dup, hap_dbs, cand_allele1, cand_allele2, test_allele1, tes
     elif allele_cn_list[3] == -1:
         res_dip =  allele_cn_list[2] + "/" + allele_cn_list[0] + "x" + str(allele_cn_list[1] - 2)
 
+    elif allele_cn_list[3] < 0:
+        res_dip =  allele_cn_list[2] + "/" + allele_cn_list[0] + "x" + str(allele_cn_list[1] + allele_cn_list[3] - 1)
 
+    elif allele_cn_list[1] < 0:
+        res_dip = allele_cn_list[0] + "/" + allele_cn_list[2] + "x" + str(allele_cn_list[3] + allele_cn_list[1] - 1)
+        
 
     else:
-        res_dip = 'check'
+       res_dip = 'check'
 
     return res_dip
 
@@ -424,6 +429,39 @@ def hybrid_test_36_mod(sv_dup, cn, av_cov, cn_ex9_3pr):
         return 'hyb_36_10'
     elif (int(cn) - 2) <= float(cn_ex9_3pr) < (int(cn) - 2 + 0.95):
         return 'hyb_36_36'
+
+
+def hybrid_test_36_multi(sv_dup, cn, av_cov, cn_ex9_3pr):
+
+    if int(round(float(cn_ex9_3pr))) == int(cn):
+        return 'norm_mt'
+
+    elif ((int(cn) - 1) - 0.05) < float(cn_ex9_3pr) < ((int(cn) - 1) + 0.5):
+        return 'hyb_36_10'
+    elif (int(cn) - 2) <= float(cn_ex9_3pr) < (int(cn) - 2 + 0.95):
+        return 'hyb_36_36'
+    elif (int(cn) - 3) <= float(cn_ex9_3pr) < (int(cn) - 3 + 0.95):
+        return 'hyb_36_36_36'    
+    else:
+        return 'check'
+
+
+def hybrid_test_36_multi_10(sv_dup, cn, av_cov, cn_ex9_3pr, cn_star10):
+
+    if int(round(float(cn_ex9_3pr))) == int(cn):
+        return 'norm_mt'
+
+    elif float(cn_ex9_3pr) < ((int(cn) - 1) + 0.5):
+        cn_star36 = int(cn) - int(round(float(cn_ex9_3pr)))
+        adj_cn_star10 = int(cn_star10) - cn_star36
+        
+        if cn_star36 == 1:
+            return '*36+*10x' + str(adj_cn_star10)
+        else:
+            return '*36x' + str(cn_star36) + '+*10x'  + str(adj_cn_star10) 
+
+    else:
+        return 'check'
 
 
 def hybrid_13_2_v1(cov_in4_3pr, cov_5pr_in4):

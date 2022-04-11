@@ -97,14 +97,17 @@ print("\nResult:")
 av_cov = get_total_CN(cov_file)[1]
 cov_e1_e2 = get_total_CN(cov_file)[3]
 cov_e3_e9 = get_total_CN(cov_file)[4]
-
+cov_3p_utr = get_total_CN(cov_file)[5]
+cov_ctrl = get_total_CN(cov_file)[2]
 
 gene_alleles = ""
 
 
+conv_3p_utr = ['*5','*7','*8','*10','*19','*24','*28','*35','*36','*37']
+
+
 if snv_def_alleles != '*1/*1' and cn != '0':
     in_list = dup_test_init(sv_dup, av_cov)
-
 
 
 if cn == '2':
@@ -121,9 +124,34 @@ if cn == '2':
 
             test_12 = hybrid_12_test1(cov_e1_e2, cov_e3_e9)
 
+            test_1b = star_1b_test(cov_3p_utr, cov_ctrl)
+
             if test_12 == 'norm_var':
-                gene_alleles = "/".join(snv_def_alleles)
-                print(gene_alleles)
+
+                if test_1b == 'no_1B':
+                    gene_alleles = "/".join(snv_def_alleles)
+                    print(gene_alleles)
+
+                elif test_1b == 'het_1B' and (snv_def_alleles[ind_other] not in conv_3p_utr):
+                    gene_alleles = "*1B" + "/" + snv_def_alleles[ind_other]
+                    print(gene_alleles)
+
+                elif test_1b == 'hom_1B' and (snv_def_alleles.count('*1') == 2):
+                    gene_alleles = "*1B/*1B"
+                    print(gene_alleles)
+
+                elif test_1b =='hom_1B' and (snv_def_alleles[ind_other] in conv_3p_utr):
+                    gene_alleles = "*1B" + "/" + snv_def_alleles[ind_other]
+                    print(gene_alleles)
+
+                elif test_1b =='hom_1B':
+                    gene_alleles = "*1B" + "/" + snv_def_alleles[ind_other]
+                    print(gene_alleles)
+
+                else:
+                    gene_alleles = "/".join(snv_def_alleles)
+                    print(gene_alleles)
+
 
             elif test_12 == 'hyb_12':
                 gene_alleles = snv_def_alleles[ind_other] + "/" + "*12"
@@ -180,12 +208,24 @@ elif cn == '1':
         snv_cand_alleles = "".join(snv_cand_alleles)
         snv_cand_alleles = snv_cand_alleles.split("_")
 
+        test_1b = star_1b_test(cov_3p_utr, cov_ctrl)
+
         if snv_def_alleles[0] == snv_def_alleles[1]:
         
             if del_confirm == "*4/*4":
                 del_confirm = "*4"
             else:
                 del_confirm = "*4"
+
+            if snv_def_alleles[0] == '*1':
+                if test_1b == 'hom_1B':
+                    snv_def_alleles[0] = '*1B'
+
+                else:
+                    pass
+
+            else:
+                pass
 
             gene_alleles = del_confirm + "/" + snv_def_alleles[0]
             print(gene_alleles)

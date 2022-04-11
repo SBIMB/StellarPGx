@@ -139,11 +139,11 @@ if (params.build=='b37') {
 	region_b2 = "041494750-041522800"
 
     } else if (params.gene=='cyp2c19') {
-      	chrom = "chr10"
-	region_a1 = "chr10:96512500-96622500"
-	region_a2 = "096512500-096622500"
-	region_b1 = "chr10:96519000-96612750"
-	region_b2 = "096519000-096612750"
+        chrom = "chr10"
+         region_a1 = "chr10:96518000-96613000"
+         region_a2 = "096518000-096613000"
+         region_b1 = "chr10:96519000-96612750"
+         region_b2 = "096519000-096612750"
 
     } else if (params.gene=='cyp2c9') {
         chrom = "chr10"
@@ -367,68 +367,13 @@ process call_snvs1 {
     else
         sam_ind='bai'   
       
-    if (params.gene=='cyp2c19') 
-        if (params.build=='b37')
-            """
-            graphtyper genotype ${ref_dir}/${ref_genome} --sam=${name}.${ext} --sams_index=<(echo ${name}.${sam_ind}) --region=${region_a1} --output=${name}_var_1 --prior_vcf=${res_dir}/common_plus_core_var.vcf.gz -a ${debug38} ${cram_options} 
+    """
+    graphtyper genotype ${ref_dir}/${ref_genome} --sam=${name}.${ext} --sams_index=<(echo ${name}.${sam_ind}) --region=${region_a1} --output=${name}_var_1 --prior_vcf=${res_dir}/common_plus_core_var.vcf.gz -a ${debug38} ${cram_options}
+    bcftools concat ${name}_var_1/${chrom}/*.vcf.gz > ${name}_var_1/${chrom}/${region_a2}.vcf 
+    bgzip -f ${name}_var_1/${chrom}/${region_a2}.vcf 
+    tabix -f ${name}_var_1/${chrom}/${region_a2}.vcf.gz
 
-	    bcftools concat ${name}_var_1/10/096518000-096567999.vcf.gz ${name}_var_1/10/096568000-096613000.vcf.gz -Oz -o ${name}_var_1/10/096518000-096613000.vcf.gz
-	    tabix ${name}_var_1/10/096518000-096613000.vcf.gz  
-
-            """
-
-        else if (params.build=='hg19')
-            """
-            graphtyper genotype ${ref_dir}/${ref_genome} --sam=${name}.${ext} --sams_index=<(echo ${name}.${sam_ind}) --region=${region_a1} --output=${name}_var_1 --prior_vcf=${res_dir}/common_plus_core_var.vcf.gz -a ${debug38} ${cram_options}
-
-            bcftools concat ${name}_var_1/chr10/096518000-096567999.vcf.gz ${name}_var_1/chr10/096568000-096613000.vcf.gz -Oz -o ${name}_var_1/chr10/096518000-096613000.vcf.gz
-
-            tabix ${name}_var_1/chr10/096518000-096613000.vcf.gz
-            """
-
-        else
-            """
-            graphtyper genotype ${ref_dir}/${ref_genome} --sam=${name}.${ext} --sams_index=<(echo ${name}.${sam_ind}) --region=${region_a1} --output=${name}_var_1 --prior_vcf=${res_dir}/common_plus_core_var.vcf.gz -a ${debug38} ${cram_options}
-
-            bcftools concat ${name}_var_1/chr10/094752750-094802749.vcf.gz ${name}_var_1/chr10/094802750-094852749.vcf.gz ${name}_var_1/chr10/094852750-094865500.vcf.gz -Oz -o ${name}_var_1/chr10/094752750-094865500.vcf.gz
-
-            tabix ${name}_var_1/chr10/094752750-094865500.vcf.gz
-            """
-
-    else if (params.gene=='cypor')
-        if (params.build=='b37')
-            """
-            graphtyper genotype ${ref_dir}/${ref_genome} --sam=${name}.${ext} --sams_index=<(echo ${name}.${sam_ind}) --region=${region_a1} --output=${name}_var_1 --prior_vcf=${res_dir}/common_plus_core_var.vcf.gz -a ${debug38} ${cram_options}
-
-            bcftools concat ${name}_var_1/7/075540000-075589999.vcf.gz ${name}_var_1/7/075590000-075617500.vcf.gz -Oz -o ${name}_var_1/7/075540000-075617500.vcf.gz
-            tabix ${name}_var_1/7/075540000-075617500.vcf.gz
-
-            """
-
-        else if (params.build=='hg19')
-            """
-            graphtyper genotype ${ref_dir}/${ref_genome} --sam=${name}.${ext} --sams_index=<(echo ${name}.${sam_ind}) --region=${region_a1} --output=${name}_var_1 --prior_vcf=${res_dir}/common_plus_core_var.vcf.gz -a ${debug38} ${cram_options}
-
-            bcftools concat ${name}_var_1/chr7/075540000-075589999.vcf.gz ${name}_var_1/chr7/075590000-075617500.vcf.gz -Oz -o ${name}_var_1/chr7/075540000-075617500.vcf.gz
-
-            tabix ${name}_var_1/chr7/075540000-075617500.vcf.gz
-            """
-
-        else
-            """
-            graphtyper genotype ${ref_dir}/${ref_genome} --sam=${name}.${ext} --sams_index=<(echo ${name}.${sam_ind}) --region=${region_a1} --output=${name}_var_1 --prior_vcf=${res_dir}/common_plus_core_var.vcf.gz -a ${debug38} ${cram_options}
-
-            bcftools concat ${name}_var_1/chr7/075905155-075955154.vcf.gz ${name}_var_1/chr7/075955155-075996855.vcf.gz -Oz -o ${name}_var_1/chr7/075905155-075996855.vcf.gz
-
-            tabix ${name}_var_1/chr7/075905155-075996855.vcf.gz
-            """
-
-
-
-    else
-        """
-        graphtyper genotype ${ref_dir}/${ref_genome} --sam=${name}.${ext} --sams_index=<(echo ${name}.${sam_ind}) --region=${region_a1} --output=${name}_var_1 --prior_vcf=${res_dir}/common_plus_core_var.vcf.gz -a ${debug38} ${cram_options}
-        """
+    """
 
 }
 
@@ -457,63 +402,13 @@ process call_snvs2 {
     else 
         sam_ind='bai'
 
-    if (params.gene == 'cyp2c19')
-        if (params.build == 'b37')   
-            """  
-	    graphtyper genotype ${ref_dir}/${ref_genome} --sam=${name}.${ext} --sams_index=<(echo ${name}.${sam_ind}) --region=${region_a1} --output=${name}_var_2 -a ${debug38} ${debug37} ${cram_options}  
-            bcftools concat ${name}_var_2/10/096518000-096567999.vcf.gz ${name}_var_2/10/096568000-096613000.vcf.gz -Oz -o ${name}_var_2/10/096518000-096613000.vcf.gz   
-            tabix ${name}_var_2/10/096518000-096613000.vcf.gz
-            """
+    """
+    graphtyper genotype ${ref_dir}/${ref_genome} --sam=${name}.${ext} --sams_index=<(echo ${name}.${sam_ind}) --region=${region_a1} --output=${name}_var_2 -a ${debug38} ${debug37} ${cram_options}
+    bcftools concat ${name}_var_2/${chrom}/*.vcf.gz > ${name}_var_2/${chrom}/${region_a2}.vcf       
+    bgzip -f ${name}_var_2/${chrom}/${region_a2}.vcf
+    tabix -f ${name}_var_2/${chrom}/${region_a2}.vcf.gz
 
-        else if (params.build=='hg19')
-            """
-            graphtyper genotype ${ref_dir}/${ref_genome} --sam=${name}.${ext} --sams_index=<(echo ${name}.${sam_ind}) --region=${region_a1} --output=${name}_var_2 --prior_vcf=${res_dir}/common_plus_core_var.vcf.gz -a ${debug38} ${cram_options}
-
-            bcftools concat ${name}_var_2/chr10/096518000-096567999.vcf.gz ${name}_var_2/chr10/096568000-096613000.vcf.gz -Oz -o ${name}_var_2/chr10/096518000-096613000.vcf.gz
-
-            tabix ${name}_var_2/chr10/096518000-096613000.vcf.gz
-            """
-
-        else
-            """
-            graphtyper genotype ${ref_dir}/${ref_genome} --sam=${name}.${ext} --sams_index=<(echo ${name}.${sam_ind}) --region=${region_a1} --output=${name}_var_2 --prior_vcf=${res_dir}/common_plus_core_var.vcf.gz -a ${debug38} ${cram_options}
-
-            bcftools concat ${name}_var_2/chr10/094752750-094802749.vcf.gz ${name}_var_2/chr10/094802750-094852749.vcf.gz ${name}_var_2/chr10/094852750-094865500.vcf.gz -Oz -o ${name}_var_2/chr10/094752750-094865500.vcf.gz
-
-            tabix ${name}_var_2/chr10/094752750-094865500.vcf.gz
-           """
-
-    else if (params.gene=='cypor')
-        if (params.build=='b37')
-            """
-            graphtyper genotype ${ref_dir}/${ref_genome} --sam=${name}.${ext} --sams_index=<(echo ${name}.${sam_ind}) --region=${region_a1} --output=${name}_var_2 --prior_vcf=${res_dir}/common_plus_core_var.vcf.gz -a ${debug38} ${cram_options}
-
-            bcftools concat ${name}_var_2/7/075540000-075589999.vcf.gz ${name}_var_2/7/075590000-075617500.vcf.gz -Oz -o ${name}_var_2/7/075540000-075617500.vcf.gz
-            tabix ${name}_var_2/7/075540000-075617500.vcf.gz
-            """
-
-        else if (params.build=='hg19')
-            """
-            graphtyper genotype ${ref_dir}/${ref_genome} --sam=${name}.${ext} --sams_index=<(echo ${name}.${sam_ind}) --region=${region_a1} --output=${name}_var_2 --prior_vcf=${res_dir}/common_plus_core_var.vcf.gz -a ${debug38} ${cram_options}
-
-            bcftools concat ${name}_var_2/chr7/075540000-075589999.vcf.gz ${name}_var_2/chr7/075590000-075617500.vcf.gz -Oz -o ${name}_var_2/chr7/075540000-075617500.vcf.gz
-
-            tabix ${name}_var_2/chr7/075540000-075617500.vcf.gz
-            """
-
-        else
-            """
-            graphtyper genotype ${ref_dir}/${ref_genome} --sam=${name}.${ext} --sams_index=<(echo ${name}.${sam_ind}) --region=${region_a1} --output=${name}_var_2 --prior_vcf=${res_dir}/common_plus_core_var.vcf.gz -a ${debug38} ${cram_options}
-
-            bcftools concat ${name}_var_2/chr7/075905155-075955154.vcf.gz ${name}_var_2/chr7/075955155-075996855.vcf.gz -Oz -o ${name}_var_2/chr7/075905155-075996855.vcf.gz
-
-            tabix ${name}_var_2/chr7/075905155-075996855.vcf.gz
-            """
-
-    else
-        """
-	graphtyper genotype ${ref_dir}/${ref_genome} --sam=${name}.${ext} --sams_index=<(echo ${name}.${sam_ind}) --region=${region_a1} --output=${name}_var_2 -a ${debug38} ${debug37} ${cram_options}
-	"""
+    """
 
 }
 

@@ -311,11 +311,15 @@ elif (int(cn) == 3 or int(cn) == 4) and snv_def_alleles != None:
 
 
             phased_dup = dup_test_cn_3_4(sv_dup, hap_dbs, snv_cand_alleles[0], snv_cand_alleles[1], snv_def_alleles[0], snv_def_alleles[1], cn, av_cov, in_list)
-            # print(phased_dup)
+
+            if phased_dup == 'check':
+                phased_dup == 'No_call'
+
+            else:
+                pass
             
             phased_dup1 = phased_dup.split("/")
 
-            # print (hybrid_test_68(sv_dup, cn, av_cov, cn_in1_3pr, in_list))
 
             if '*4x2' in phased_dup1:
                 count1 = phased_dup1.count('*4x2')
@@ -334,7 +338,7 @@ elif (int(cn) == 3 or int(cn) == 4) and snv_def_alleles != None:
                         if int(cn_in1_3pr) < int(cn):
                             phased_dup = phased_dup.replace('*4x2', '*68+*4')
 
-                        elif int(cn_in1_3pr) == int(cn) and 'x' not in other_hap:
+                        elif int(cn_in1_3pr) == int(cn) and ('x' not in other_hap) and int(cn) == 4:
                             phased_dup = phased_dup.replace('*4x2', '*68+*4')
                             phased_dup = phased_dup.replace(other_hap, (other_hap + 'x2'))
 
@@ -359,7 +363,6 @@ elif (int(cn) == 3 or int(cn) == 4) and snv_def_alleles != None:
 
                         elif int(cn_in1_3pr) == int(cn) and 'x' not in other_hap:
                             phased_dup = phased_dup.replace('*4x3', '*68+*4')
-                           # phased_dup = phased_dup.replace(other_hap, (other_hap + 'x2'))
 
                 elif count1 == 2:
                     pass
@@ -392,7 +395,6 @@ elif (int(cn) == 3 or int(cn) == 4) and snv_def_alleles != None:
 
                 if count3 == 1:
                     test_36 = hybrid_test_36_mod(sv_dup, cn, av_cov, cn_ex9_3pr)
-                   # print (test_36)
 
                     if test_36 == 'norm_mt':
                         pass
@@ -487,9 +489,6 @@ elif (int(cn) == 3 or int(cn) == 4) and snv_def_alleles != None:
                 a_ind1 = phased_dup1.index('*4x2')
                 a_ind2 = 1 - a_ind1
 
-            # for i in phased_dup1:
-            #     if i != '*4x2':
-            #         other_hap = i
 
                 if count1 == 1:
                     test_68 = hybrid_test_68(sv_dup, cn, av_cov, cn_in1_3pr, in_list)
@@ -508,7 +507,6 @@ elif (int(cn) == 3 or int(cn) == 4) and snv_def_alleles != None:
 
                 if count2 == 1:
                     test_36 = hybrid_test_36(sv_dup, cn, av_cov, cn_ex9_3pr)
-                   # print (test_36)
 
                     if test_36 == 'norm_dup':
                         pass
@@ -527,7 +525,6 @@ elif (int(cn) == 3 or int(cn) == 4) and snv_def_alleles != None:
                 if count3 == 1:
                     test_36 = hybrid_test_36_mod(sv_dup, cn, av_cov, cn_ex9_3pr)
                     
-                   # print (test_36)
                     
                     if test_36 == 'norm_mt':
                         pass
@@ -535,7 +532,6 @@ elif (int(cn) == 3 or int(cn) == 4) and snv_def_alleles != None:
                     elif test_36 == 'hyb_36_10':
                         phased_dup = phased_dup.replace('*10x3', '*36+*10x2')
 
-                    # *10x2/*36+*10
                     
                     elif test_36 == 'hyb_36_36':
                         phased_dup = '*36+*10/*36+*10'                
@@ -556,7 +552,6 @@ elif (int(cn) == 3 or int(cn) == 4) and snv_def_alleles != None:
 
                     elif test_83 == 'hyb_83':
                         phased_dup = phased_dup.replace('*1x3', '*1x2+*83')
-
 
 
             if '*2x2' in phased_dup1:
@@ -581,7 +576,6 @@ elif (int(cn) == 3 or int(cn) == 4) and snv_def_alleles != None:
                         phased_dup = phased_dup1[b_ind2] + "/" + '*13+*2'
 
 
-
             gene_alleles = phased_dup
             print(phased_dup)
 
@@ -599,9 +593,125 @@ elif int(cn) > 4 and snv_def_alleles != None:
         if snv_def_alleles[0] != snv_def_alleles[1]:
 
             phased_dup = dup_test_cn_n(sv_dup, hap_dbs, snv_cand_alleles[0], snv_cand_alleles[1], snv_def_alleles[0], snv_def_alleles[1], cn, av_cov, in_list)
+
+            if phased_dup == 'check':
+                phased_dup = 'No_call'
+
+            else:
+                pass
+
+            phased_dup1 = phased_dup.split("/")
+
+            if '*10x4' in phased_dup1:
+                count3 = phased_dup1.count('*10x4')
+                c_ind1 = phased_dup1.index('*10x4')
+                c_ind2 = 1 - c_ind1
+
+                if count3 == 1:
+                    test_36 = hybrid_test_36_multi(sv_dup, cn, av_cov, cn_ex9_3pr)
+
+
+                    if test_36 == 'norm_mt':
+                        pass
+
+                    elif test_36 == 'hyb_36_10':
+                        phased_dup = phased_dup.replace('*10x4', '*36+*10x3')
+
+
+                    elif test_36 == 'hyb_36_36':
+                        phased_dup = phased_dup.replace('*10x4', '*36x2+*10x2')
+
+                    elif test_36 == 'hyb_36_36_36':
+                        phased_dup = phased_dup.replace('*10x4','*36x3+*10')
+
+                    else:
+                        phased_dup = "No_call"
+
+
+            elif '*10x3' in phased_dup1:
+                count3 = phased_dup1.count('*10x3')
+                c_ind1 = phased_dup1.index('*10x3')
+                c_ind2 = 1 - c_ind1
+
+                if count3 == 1:
+                    test_36 = hybrid_test_36_multi(sv_dup, cn, av_cov, cn_ex9_3pr)
+
+                    if test_36 == 'norm_mt':
+                        pass
+
+                    elif test_36 == 'hyb_36_10':
+                        phased_dup = phased_dup.replace('*10x3', '*36+*10x2')
+
+                    elif test_36 == 'hyb_36_36':
+                        phased_dup = phased_dup.replace('*10x3', '*36x2+*10')
+
+                    elif test_36 == 'hyb_36_36_36':
+                        phased_dup = phased_dup.replace('*10x3','*36x3')
+
+            elif '*10x' in phased_dup1:
+                phased_dup = 'No_call'
+
+
+
         elif snv_def_alleles[0] == snv_def_alleles[1]:
             rt_2 = int(cn) - 1
             phased_dup = (snv_def_alleles[0] + "/" + snv_def_alleles[1] + "x" + str(rt_2))
+
+            if phased_dup == 'check':
+                phased_dup = 'No_call'
+
+            else:
+                pass
+
+            phased_dup1 = phased_dup.split("/")
+
+            if '*10x4' in phased_dup1:
+                count3 = phased_dup1.count('*10x4')
+                c_ind1 = phased_dup1.index('*10x4')
+                c_ind2 = 1 - c_ind1
+
+                if count3 == 1:
+                    test_36 = hybrid_test_36_multi(sv_dup, cn, av_cov, cn_ex9_3pr)
+
+
+                    if test_36 == 'norm_mt':
+                        pass
+
+                    elif test_36 == 'hyb_36_10':
+                        phased_dup = phased_dup.replace('*10x4', '*36+*10x3')
+
+
+                    elif test_36 == 'hyb_36_36':
+                        phased_dup = '*36+*10/*36+*10x2'
+
+                    elif test_36 == 'hyb_36_36_36':
+                        phased_dup = '*36+*10/*36x2+*10'
+
+                    else:
+                        phased_dup = "No_call"
+
+            elif phased_dup1[0].startswith('*10x') or phased_dup1[1].startswith('*10x'):
+
+                if phased_dup1[0].startswith('*10x'):
+                    dup_10_hyb = phased_dup1[0]
+
+                elif phased_dup1[1].startswith('*10x'):
+                    dup_10_hyb = phased_dup1[1]
+
+                cn_star10 = dup_10_hyb[(dup_10_hyb.find('x') + 1 ):]
+
+                test_36 = hybrid_test_36_multi_10(sv_dup, cn, av_cov, cn_ex9_3pr, cn_star10)
+
+                if test_36 == 'norm_mt':
+                    pass
+
+                elif test_36 == 'check':
+                    phased_dup = 'No_call'
+
+                else:
+                    c_ind1 = phased_dup1.index(dup_10_hyb)
+                    c_ind2 = 1 - c_ind1
+                    phased_dup = str(phased_dup1[c_ind2]) + "/" + test_36
 
 
         gene_alleles = phased_dup
@@ -663,7 +773,7 @@ def get_ac_score(act_score, star_alleles):
         return total_a_score
 
 
-if gene_alleles == "":
+if gene_alleles in ["",'No_call','check']:
     ac_score = "Indeterminate"
     print(ac_score)
 

@@ -27,7 +27,7 @@ for i in $(cat $FILE1); do
     paste <(echo ${i}) <(grep "Possible" ${i}*alleles) | column -s $'\t' -t -o $'\t' >> $FILE2
 
     else
-    paste <(echo ${i}) <(echo check) | column -s $'\t' -t -o $'\t' >> $FILE2
+    paste <(echo ${i}) <(echo No_call) | column -s $'\t' -t -o $'\t' >> $FILE2
     fi
 
 done

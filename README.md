@@ -21,9 +21,9 @@ The following are required to run the StellarPGx pipeline;
 
 1. Prerequisite software
     - [`Nextflow`](https://nf-co.re/usage/installation) (preferably v18.x or higher)
-    - [`Singularity`](https://sylabs.io/) (v2.3.x or higher) or [`Docker`](https://docs.docker.com)
+    - [`Singularity`](https://sylabs.io/) (v3.1.x or higher) or [`Docker`](https://docs.docker.com)
     
-Singularity is highly recommended especially for running the pipeline in an HPC environment running Linux OS. Docker desktop is recommended for MacOS users intending to run/test the pipeline on a local machine. If you're just using your Mac to connect to a Linux cluster environment, then you can just proceed with Singularity on the cluster as the default.
+Singularity (v3.1.x or higher) is highly recommended especially for running the pipeline in an HPC environment running Linux OS. Docker desktop is recommended for MacOS users intending to run/test the pipeline on a local machine. If you're just using your Mac to connect to a Linux cluster environment, then you can just proceed with Singularity on the cluster as the default.
 
 
 
@@ -97,6 +97,10 @@ nextflow run main.nf -profile standard,test
 ```bash
 nextflow run main.nf -profile slurm,test
 ```
+
+
+##### Note:
+If you get the error `Failed to submit process to grid scheduler for execution`, then you need to ask your system administrator for the appropriate `process.queue` value in the slurm stanza (see nextflow.config file) to your cluster's queue. The default is bash – other examples include `defq`, `Main`, etc.
 
 
 ### Step 3 - Expected output

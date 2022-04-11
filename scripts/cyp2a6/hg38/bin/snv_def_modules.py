@@ -26,6 +26,15 @@ def get_all_vars_gt(infile_full_gt):
     all_vars_gt = ";".join(sorted(all_vars_gt))
     return all_vars_gt
 
+
+def format_allele(diplo_n):
+    res1 = [i for i in range(len(diplo_n)) if diplo_n.startswith("_", i)]
+    res2 = [i for i in range(len(diplo_n)) if diplo_n.startswith(".", i)]
+    hap1 = "*" + str (diplo_n[:res2[0]])
+    hap2 = "*" + str (diplo_n[res1[0]+1:res2[1]])
+    return (hap1 + "/" + hap2)
+
+
 def cand_snv_allele_calling(database, infile, infile_full, infile_full_gt, infile_spec, cn):
     
 
