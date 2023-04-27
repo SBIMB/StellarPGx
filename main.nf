@@ -1,5 +1,6 @@
 #!/usr/bin/env nextflow
 
+nextflow.enable.dsl=1
 
 gene_name = params.gene
 d_base = params.db_init
