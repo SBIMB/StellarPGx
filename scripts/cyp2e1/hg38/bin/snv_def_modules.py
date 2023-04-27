@@ -119,7 +119,6 @@ def cand_snv_allele_calling(database, infile, infile_full, infile_full_gt, infil
 
 
     elif len(soln_list1) == 2:
-        print(soln_list1)
         diplo1 = soln_list1[0]
         diplo2 = soln_list1[1]
         diplo1_supp_var = soln_list2[0].split(";")

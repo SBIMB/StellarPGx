@@ -215,4 +215,4 @@ elif int(cn) > 4 and snv_def_alleles != None:
 
 elif int(cn) > 2 and snv_def_alleles == None:
     
-    print("Possible rare CYP2C19 structural variant present")
+    print("Possible rare CYP2E1 structural variant present")
