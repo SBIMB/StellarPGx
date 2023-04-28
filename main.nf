@@ -314,7 +314,24 @@ if (params.build=='b37') {
        region_b1 = "chr7:75910155-75991855"
        region_b2 = "075910155-075991855"
 
+    } else if (params.gene=='nat1') {
+       chrom = "chr8"
+       region_a1 = "chr8:18170000-18226000"
+       region_a2 = "018170000-018226000"
+       region_b1 = "chr8:18221000-18224000"
+       region_b2 = "018221000-018224000"
+
+    } else if (params.gene=='nat2') {
+       chrom = "chr8"
+       region_a1 = "chr8:18386000-18402000"
+       region_a2 = "018386000-018402000"
+       region_b1 = "chr8:18386000-18402000"
+       region_b2 = "018386000-018402000"
+
     }
+
+
+
 
 }
 
