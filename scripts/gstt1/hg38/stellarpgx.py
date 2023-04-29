@@ -10,7 +10,7 @@ from bkg_modules import *
 
 print("--------------------------------------------\n")
 
-print("NAT1 Star Allele Calling with StellarPGx\n")
+print("GSTT1 Star Allele Calling with StellarPGx\n")
 
 print("--------------------------------------------\n")
 
@@ -88,7 +88,7 @@ av_cov = get_total_CN(cov_file)[1]
 gene_alleles = ""
 
 
-if snv_def_alleles != '*ref/*ref' and cn != '0':
+if snv_def_alleles != '*A/*A' and cn != '0':
     in_list = dup_test_init(sv_dup, av_cov)
 
 
@@ -105,15 +105,15 @@ if cn == '2':
 elif cn == '0':
     del_confirm = del_test(sv_del)
     if del_confirm == '*(full_gene_del)/*(full_gene_del)':
-        gene_alleles = del_confirm
+        gene_alleles = "*0/*0"
         print (gene_alleles)
         
     elif del_confirm == '*(full_gene_del)':
-        gene_alleles = del_confirm + "/" + "*other"
+        gene_alleles = "*0" + "/" + "*other"
         print(gene_alleles)
 
     else:
-        gene_alleles = "*(full_gene_del)/*(full_gene_del)"
+        gene_alleles = "*0/*0"
         print(gene_alleles)
 
 
@@ -121,7 +121,7 @@ elif cn == '1':
     del_confirm = del_test(sv_del)
  
     if "or" in snv_def_alleles and del_confirm == 'None':
-        print (snv_def_alleles + "\t" + "Possible NAT1 gene deletion present")
+        print (snv_def_alleles + "\t" + "Possible GSTT1 gene deletion present")
 
     elif "or" not in snv_def_alleles and del_confirm == 'None':
         snv_def_alleles = snv_def_alleles.split("/")
@@ -129,13 +129,13 @@ elif cn == '1':
         snv_cand_alleles = snv_cand_alleles.split("_")
 
         if snv_def_alleles[0] == snv_def_alleles[1]:
-            gene_alleles = snv_def_alleles[0] + "/" + "*(full_gene_del)"
+            gene_alleles = snv_def_alleles[0] + "/" + "*0"
             print(gene_alleles)
 
         elif snv_def_alleles[0] != snv_def_alleles[1]:
             samp_allele1 = del_adv_test(hap_dbs, snv_cand_alleles[0], snv_cand_alleles[1], snv_def_alleles[0], snv_def_alleles[1], supp_core_vars)
   
-            gene_alleles = samp_allele1 + "/" + "*(full_gene_del)"
+            gene_alleles = samp_allele1 + "/" + "*0"
             print(gene_alleles)
 
     else:
@@ -146,7 +146,7 @@ elif cn == '1':
         if snv_def_alleles[0] == snv_def_alleles[1]:
         
             if del_confirm == "*(full_gene_del)/*(full_gene_del)":
-                del_confirm = "*(full_gene_del)"
+                del_confirm = "*0"
             gene_alleles = del_confirm + "/" + snv_def_alleles[0]
             print(gene_alleles)
 
@@ -154,7 +154,7 @@ elif cn == '1':
             samp_allele1 = del_adv_test(hap_dbs, snv_cand_alleles[0], snv_cand_alleles[1], snv_def_alleles[0], snv_def_alleles[1], supp_core_vars)
     
             if del_confirm == "*(full_gene_del)/*(full_gene_del)":
-                del_confirm = "*(full_gene_del)"
+                del_confirm = "*0"
             gene_alleles = del_confirm + "/" + samp_allele1
             print(gene_alleles)
 
@@ -215,4 +215,4 @@ elif int(cn) > 4 and snv_def_alleles != None:
 
 elif int(cn) > 2 and snv_def_alleles == None:
     
-    print("Possible rare NAT1 structural variant present")
+    print("Possible rare GSTT1 structural variant present")
