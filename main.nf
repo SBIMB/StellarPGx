@@ -12,7 +12,7 @@ params.build='hg38'
 
 if (params.build=='b37') {
     db = "${d_base}/${gene_name}/b37"
-    res_dir = "${res_base}/${gene_name}/b37"
+    res_dir = "${res_base}/${gene_name}/res_b37"
     caller_dir = "${caller_base}/${gene_name}/b37/bin"
     debug37 = "--minimum_extract_score_over_homref=0"
     debug38 = ""
@@ -112,7 +112,7 @@ if (params.build=='b37') {
 
 } else if (params.build=='hg19') {
     db = "${d_base}/${gene_name}/b37"
-    res_dir = "${res_base}/${gene_name}/hg19"
+    res_dir = "${res_base}/${gene_name}/res_hg19"
     caller_dir = "${caller_base}/${gene_name}/b37/bin"
     debug37 = "--minimum_extract_score_over_homref=0"
     debug38 = ""
@@ -217,7 +217,7 @@ if (params.build=='b37') {
 
 } else {
     db = "${d_base}/${gene_name}/hg38"
-    res_dir = "${res_base}/${gene_name}/hg38"
+    res_dir = "${res_base}/${gene_name}/res_hg38"
     caller_dir = "${caller_base}/${gene_name}/hg38/bin"
     debug37 = ""
     debug38 = "--minimum_extract_score_over_homref=0"
