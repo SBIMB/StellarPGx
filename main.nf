@@ -331,16 +331,16 @@ if (params.build=='b37') {
     } else if (params.gene=='gstm1') {
        chrom = "chr1"
        region_a1 = "chr1:109687000-109695000"
-       region_a2 = "0109687000-0109695000"
+       region_a2 = "109687000-109695000"
        region_b1 = "chr1:109687000-109695000"
-       region_b2 = "0109687000-0109695000"
+       region_b2 = "109687000-109695000"
 
     } else if (params.gene=='gstt1') {
        chrom = "chr22_KI270879v1_alt"
        region_a1 = "chr22_KI270879v1_alt:269000-280000"
-       region_a2 = "0269000-0280000"
+       region_a2 = "000269000-000280000"
        region_b1 = "chr22_KI270879v1_alt:269000-280000"
-       region_b2 = "0269000-0280000"
+       region_b2 = "000269000-000280000"
 
     }
 
