@@ -109,7 +109,7 @@ elif cn == '0':
         print (gene_alleles)
         
     elif del_confirm == '*(full_gene_del)':
-        gene_alleles = "*0" + "/" + "*other"
+        gene_alleles = "*0" + "/" + "*0"
         print(gene_alleles)
 
     else:
