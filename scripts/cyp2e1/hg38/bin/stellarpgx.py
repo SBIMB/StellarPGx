@@ -88,7 +88,7 @@ av_cov = get_total_CN(cov_file)[1]
 gene_alleles = ""
 
 
-if snv_def_alleles != '*ref/*ref' and cn != '0':
+if snv_def_alleles != '*2E1-ref-hg38/*2E1-ref-hg38' and cn != '0':
     in_list = dup_test_init(sv_dup, av_cov)
 
 
