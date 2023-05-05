@@ -43,6 +43,10 @@ def del_test(sv_del):
         
                 if float(ABHom) == 1.0:
                     return "*(full_gene_del)/*(full_gene_del)"
+
+                elif float(ABHet) == -1.0 and round(float(ABHom), 1) == 1.0:
+                    return "*(full_gene_del)/*(full_gene_del)"
+                
                 elif float(ABHom) == -1.0:
                     return "*(full_gene_del)"
             else:
