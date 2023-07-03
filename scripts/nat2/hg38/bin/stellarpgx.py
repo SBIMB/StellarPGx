@@ -129,7 +129,10 @@ def resolve_haps (hap_snvs_file, hap_dbs_file):
 
 if cn == '2':
 
-    if 'or' in snv_def_alleles:
+    if 'or' in snv_def_alleles and supp_core_vars == '18400194~G>A~0/1;18400285~C>T~0/1;18400806~G>A~1/1;18400860~G>A~0/1':
+        gene_alleles = '*14A/*7B'
+        
+    elif 'or' in snv_def_alleles:
         
         gene_alleles = resolve_haps(hap_snvs, hap_dbs)
         print(gene_alleles)
