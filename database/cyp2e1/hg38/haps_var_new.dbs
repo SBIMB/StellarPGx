@@ -10,3 +10,10 @@
 *7B	7B.v1	133527325~G>T;133537633~G>C
 *7C	7C.v1	133527044~A>G;133537633~G>C
 2E1-ref-hg38	2E1-ref-hg38	2E1-ref-hg38
+novel-hap1	novel-hap1	133527044~A>G
+novel-hap2	novel-hap2	133527325~G>T
+novel-hap3	novel-hap3	133532171~G>A
+novel-hap4	novel-hap4	133532171~G>A;133537633~G>C
+novel-hap5	novel-hap5	133526101~G>C;133532171~G>A;133537633~G>C
+novel-hap6	novel-hap6	133526101~G>C;133527063~A>T
+novel-hap7	novel-hap7	133526101~G>C;133527044~A>G;133537633~G>C
