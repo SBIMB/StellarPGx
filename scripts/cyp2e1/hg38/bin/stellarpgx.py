@@ -165,7 +165,7 @@ elif (int(cn) == 3 or int(cn) == 4) and snv_def_alleles != None:
     orig = snv_def_alleles
 
     if "or" in snv_def_alleles:
-        print (snv_def_alleles + "\t" + "Duplication present")
+        print (snv_def_alleles + "\n" + "(Duplication present)")
 
     else:
         snv_def_alleles = snv_def_alleles.split("/")
