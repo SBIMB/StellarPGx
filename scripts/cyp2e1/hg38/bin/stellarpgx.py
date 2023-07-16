@@ -145,9 +145,13 @@ elif cn == '1':
 
         if snv_def_alleles[0] == snv_def_alleles[1]:
         
-            if del_confirm == "*(full_gene_del)/*(full_gene_del)" or del_confirm == "*(full_gene_del)":
+            if del_confirm == "*(full_gene_del)/*(full_gene_del)":
                 del_confirm = "*(full_gene_del)"
                 gene_alleles = del_confirm + "/" + snv_def_alleles[0]
+                print(gene_alleles)
+
+            else:
+                gene_alleles = "*(full_gene_del)" + "/" + snv_def_alleles[0]
                 print(gene_alleles)
 
         elif snv_def_alleles[0] != snv_def_alleles[1]:
