@@ -145,7 +145,7 @@ elif cn == '1':
 
         if snv_def_alleles[0] == snv_def_alleles[1]:
         
-            if del_confirm == "*(full_gene_del)/*(full_gene_del)":
+            if del_confirm == "*(full_gene_del)/*(full_gene_del)" or del_confirm == "*(full_gene_del)":
                 del_confirm = "*(full_gene_del)"
                 gene_alleles = del_confirm + "/" + snv_def_alleles[0]
                 print(gene_alleles)
@@ -153,7 +153,7 @@ elif cn == '1':
         elif snv_def_alleles[0] != snv_def_alleles[1]:
             samp_allele1 = del_adv_test(hap_dbs, snv_cand_alleles[0], snv_cand_alleles[1], snv_def_alleles[0], snv_def_alleles[1], supp_core_vars)
     
-            if del_confirm == "*(full_gene_del)/*(full_gene_del)":
+            if del_confirm == "*(full_gene_del)/*(full_gene_del)" or del_confirm == "*(full_gene_del)":
                 del_confirm = "*(full_gene_del)"
                 gene_alleles = del_confirm + "/" + samp_allele1
                 print(gene_alleles)
