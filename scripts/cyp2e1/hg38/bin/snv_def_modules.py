@@ -170,7 +170,8 @@ def cand_snv_allele_calling(database, infile, infile_full, infile_full_gt, infil
             elif score.count(min_score) > 1:
                 index_scores = []
                 amb_soln_set = []
-
+                elem_list = []
+                
                 for i in score:
                     if i == min_score:
                         index_scores.append(score.index(i))
@@ -178,6 +179,7 @@ def cand_snv_allele_calling(database, infile, infile_full, infile_full_gt, infil
                 alt_solns = []
                 for j in index_scores:
                     elem = tiebreak1[j]
+                    elem_list.append(elem)
                     res1 = [i for i in range(len(elem)) if elem.startswith("_", i)]
                     res2 = [i for i in range(len(elem)) if elem.startswith(".", i)]
                     hap1 = "*" + str (elem[:res2[0]])
@@ -186,7 +188,7 @@ def cand_snv_allele_calling(database, infile, infile_full, infile_full_gt, infil
                     alt_solns.append(result_dip)
                 
                 if chkList(alt_solns) == "Equal":
-                    return[soln_list1, alt_solns[0]];
+                    return[soln_list1, elem_list[0], alt_solns[0]];
                 else:
                     alt_solns = sorted(alt_solns)
                     amb_soln_set.append(alt_solns[0])
