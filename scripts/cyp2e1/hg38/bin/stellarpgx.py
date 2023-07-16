@@ -39,7 +39,6 @@ print(supp_core_vars)
 
 
 snv_def_calls = cand_snv_allele_calling(database, infile, infile_full, infile_full_gt, infile_spec, cn)
-print(snv_def_calls)
 
 if snv_def_calls == None:
 

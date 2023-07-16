@@ -179,7 +179,7 @@ def cand_snv_allele_calling(database, infile, infile_full, infile_full_gt, infil
                 alt_solns = []
                 for j in index_scores:
                     elem = tiebreak1[j]
-                    elem_list.append(elem)
+                    elem_list.append(tiebreak3[j])
                     res1 = [i for i in range(len(elem)) if elem.startswith("_", i)]
                     res2 = [i for i in range(len(elem)) if elem.startswith(".", i)]
                     hap1 = "*" + str (elem[:res2[0]])
