@@ -268,8 +268,8 @@ if (params.build=='b37') {
         chrom = "chr10"
 	region_a1 = "chr10:133517350-133549100"
 	region_a2 = "133517350-133549100"
-	region_b1 = "chr10:133526050-133537800"
-	region_b2 = "133526050-133537800"
+	region_b1 = "chr10:133522363-133544123"
+	region_b2 = "133522363-133544123"
 
     } else if (params.gene=='cyp3a4') {
         chrom = "chr7"
