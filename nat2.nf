@@ -676,8 +676,8 @@ process analyse_4 {
     script:
     """
     tabix ${phased_vcf}
-    bcftools query -e 'GT="0|1"' -f'[%POS~%REF>%ALT;]' ${phased_vcf} | rev | cut -d";" -f2- | rev > ${name}_${gene_name}_hap_snvs.dip
-    bcftools query -e 'GT="1|0"' -f'[%POS~%REF>%ALT;]' ${phased_vcf} | rev | cut -d";" -f2- | rev >> ${name}_${gene_name}_hap_snvs.dip
+    bcftools query -e 'GT="0|1" || GT="0/1"' -f'[%POS~%REF>%ALT;]' ${phased_vcf} | rev | cut -d";" -f2- | rev > ${name}_${gene_name}_hap_snvs.dip
+    bcftools query -e 'GT="1|0" || GT="0/1"' -f'[%POS~%REF>%ALT;]' ${phased_vcf} | rev | cut -d";" -f2- | rev >> ${name}_${gene_name}_hap_snvs.dip
     """
 
 
