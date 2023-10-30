@@ -275,7 +275,7 @@ if (params.build=='b37') {
 	region_a1 = "chr10:133517350-133549100"
 	region_a2 = "133517350-133549100"
 	region_b1 = "chr10:133522363-133544123"
-	region_b2 = "133522363-133544123
+	region_b2 = "133522363-133544123"
 	transcript = "ENST00000252945"
 
     } else if (params.gene=='cyp3a4') {
