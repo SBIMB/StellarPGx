@@ -625,8 +625,8 @@ process get_core_var {
     grep 'inframe_deletion|${up_gene_symbol}|${transcript}' ${name}_int/0000_annot.vcf >> ${name}_int/${name}_core_int1.vcf
     grep 'start_lost|${up_gene_symbol}|${transcript}' ${name}_int/0000_annot.vcf >> ${name}_int/${name}_core_int1.vcf
     grep 'stop_lost|${up_gene_symbol}|${transcript}' ${name}_int/0000_annot.vcf >> ${name}_int/${name}_core_int1.vcf
-    bcftools sort ${name}_int/${name}_core_int1.vcf -T ${name}_int | bgzip -c > ${name}_int/${name}_core.vcf.gz
-    tabix ${name}_int/${name}_core.vcf.gz
+    // bcftools sort ${name}_int/${name}_core_int1.vcf -T ${name}_int | bgzip -c > ${name}_int/${name}_core.vcf.gz
+    // tabix ${name}_int/${name}_core.vcf.gz
 
     """
     }
