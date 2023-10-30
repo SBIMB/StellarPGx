@@ -227,7 +227,8 @@ if (params.build=='b37') {
     	region_a1 = "chr22:42126000-42137500"
     	region_a2 = "042126000-042137500"
     	region_b1 = "chr22:42126300-42132400"
-    	region_b2 = "042126300-042132400" 
+    	region_b2 = "042126300-042132400"
+	transcript = "ENST00000645361"
 
     } else if (params.gene=='cyp2a6') {
         chrom = "chr19"
@@ -235,6 +236,7 @@ if (params.build=='b37') {
 	region_a2 = "040833541-040887450"
 	region_b1 = "chr19:40842750-40852250"
 	region_b2 = "040842750-040852250"
+	transcript = "ENST00000301141"
     
     } else if (params.gene=='cyp2b6') {
         chrom = "chr19"
@@ -242,6 +244,7 @@ if (params.build=='b37') {
 	region_a2 = "040981280-041028400"
 	region_b1 = "chr19:40988800-41016900"
 	region_b2 = "040988800-041016900"
+	transcript = "ENST00000324071"
 
     } else if (params.gene=='cyp2c19') {
         chrom = "chr10"
@@ -249,6 +252,7 @@ if (params.build=='b37') {
 	region_a2 = "094752750-094865500"
 	region_b1 = "chr10:94759250-94853000"
 	region_b2 = "094759250-094853000"
+	transcript = "ENST00000371321"
 
     } else if (params.gene=='cyp2c9') {
       	chrom = "chr10"
@@ -256,6 +260,7 @@ if (params.build=='b37') {
 	region_a2 = "094935000-094990000"
 	region_b1 = "chr10:94936000-94989200"
 	region_b2 = "094936000-094989200"
+	transcript = "ENST00000260682"
 
     } else if (params.gene=='cyp2c8') {
         chrom = "chr10"
@@ -263,13 +268,15 @@ if (params.build=='b37') {
 	region_a2 = "095026750-095079500"
 	region_b1 = "chr10:95037050-95069800"
 	region_b2 = "095037050-095069800"	
+	transcript = "ENST00000371270"
 
     } else if (params.gene=='cyp2e1') {
         chrom = "chr10"
 	region_a1 = "chr10:133517350-133549100"
 	region_a2 = "133517350-133549100"
 	region_b1 = "chr10:133522363-133544123"
-	region_b2 = "133522363-133544123"
+	region_b2 = "133522363-133544123
+	transcript = "ENST00000252945"
 
     } else if (params.gene=='cyp3a4') {
         chrom = "chr7"
@@ -277,6 +284,7 @@ if (params.build=='b37') {
 	region_a2 = "099746950-099794100"
 	region_b1 = "chr7:99757850-99784950"
 	region_b2 = "099757850-099784950"
+	transcript = "ENST00000651514"
 
     } else if (params.gene=='cyp3a5') {	
         chrom = "chr7"
@@ -284,6 +292,7 @@ if (params.build=='b37') {
 	region_a2 = "099638200-099690000"
 	region_b1 = "chr7:99648250-99680650"	
 	region_b2 = "099648250-099680650"
+	transcript = "ENST00000222982"
 
     } else if (params.gene=='cyp1a1') {
         chrom = "chr15"
@@ -291,6 +300,7 @@ if (params.build=='b37') {
 	region_a2 = "074709550-074735500"
 	region_b1 = "chr15:74719250-74725500"
 	region_b2 = "074719250-074725500"
+	transcript = "ENST00000379727"
 
     } else if (params.gene=='cyp1a2') {
         chrom = "chr15"
@@ -298,7 +308,7 @@ if (params.build=='b37') {
 	region_a2 = "074738850-074766600"
 	region_b1 = "chr15:74745850-74755280"
 	region_b2 = "074745850-074755280"
-
+	transcript = "ENST00000343932"
 
     } else if (params.gene=='cyp4f2') {
         chrom = "chr19"
@@ -306,6 +316,7 @@ if (params.build=='b37') {
 	region_a2 = "015868100-015908000"
 	region_b1 = "chr19:15878000-15898100"
 	region_b2 = "015878000-015898100"
+	transcript = "ENST00000221700"
 
     } else if (params.gene=='cypor') {
        chrom = "chr7"
@@ -313,6 +324,7 @@ if (params.build=='b37') {
        region_a2 = "075905155-075996855"
        region_b1 = "chr7:75910155-75991855"
        region_b2 = "075910155-075991855"
+       transcript = "ENST00000461988"
 
     } else if (params.gene=='nat1') {
        chrom = "chr8"
@@ -320,6 +332,7 @@ if (params.build=='b37') {
        region_a2 = "018170000-018226000"
        region_b1 = "chr8:18221000-18224000"
        region_b2 = "018221000-018224000"
+       transcript = "ENST00000307719"
 
     } else if (params.gene=='nat2') {
        chrom = "chr8"
@@ -327,6 +340,7 @@ if (params.build=='b37') {
        region_a2 = "018386000-018402000"
        region_b1 = "chr8:18386000-18402000"
        region_b2 = "018386000-018402000"
+       transcript = "ENST00000286479"
 
     } else if (params.gene=='gstm1') {
        chrom = "chr1"
@@ -334,6 +348,7 @@ if (params.build=='b37') {
        region_a2 = "109687000-109695000"
        region_b1 = "chr1:109687000-109695000"
        region_b2 = "109687000-109695000"
+       transcript = "ENST00000309851"
 
     } else if (params.gene=='gstt1') {
        chrom = "chr22_KI270879v1_alt"
@@ -341,7 +356,7 @@ if (params.build=='b37') {
        region_a2 = "000269000-000280000"
        region_b1 = "chr22_KI270879v1_alt:269000-280000"
        region_b2 = "000269000-000280000"
-
+       transcript = "ENST00000612885"
     }
 
 }
@@ -568,19 +583,53 @@ process get_core_var {
     input:
     set val(name), path("${name}_vars") from var_norm1
     path res_dir
+    path res_base
+    path ref_dir from Channel.value("${ref_dir_val}")
 
     output:
     set val(name), path("${name}_int") into (core_vars1, core_vars2)
 
     script:
+
+    up_gene_symbol = ${gene_name}.toUpperCase()
  
+    if (params.build=='b37') {
+
     """
     bcftools isec ${name}_vars/${name}_all_norm.vcf.gz ${res_dir}/allele_def_var.vcf.gz -p ${name}_int -Oz
     bcftools norm -m - ${name}_int/0002.vcf.gz | bcftools view -e 'GT="1/0"' | bcftools view -e 'GT="0/0"' | bgzip -c > ${name}_int/${name}_core.vcf.gz
     tabix ${name}_int/${name}_core.vcf.gz
-
     """
 
+    } else if (params.build=='hg19') {
+
+    """
+    bcftools isec ${name}_vars/${name}_all_norm.vcf.gz ${res_dir}/allele_def_var.vcf.gz -p ${name}_int -Oz
+    bcftools norm -m - ${name}_int/0002.vcf.gz | bcftools view -e 'GT="1/0"' | bcftools view -e 'GT="0/0"' | bgzip -c > ${name}_int/${name}_core.vcf.gz
+    tabix ${name}_int/${name}_core.vcf.gz
+    """
+
+    } else {
+
+    """
+    bcftools isec ${name}_vars/${name}_all_norm.vcf.gz ${res_dir}/allele_def_var.vcf.gz -p ${name}_int -Oz
+    bcftools norm -m - ${name}_int/0002.vcf.gz | bcftools view -e 'GT="1/0"' | bcftools view -e 'GT="0/0"' > ${name}_int/${name}_core_int1.vcf
+    bcftools csq -p m -f ${ref_dir}/${ref_genome} -g ${res_base}/annotation/Homo_sapiens.GRCh38.110.gff3.gz ${name}_int/0000.vcf.gz -o ${name}_int/0000_annot.vcf
+    
+    grep 'missense|${up_gene_symbol}|${transcript}' ${name}_int/0000_annot.vcf >> ${name}_core_int1.vcf
+    grep 'frameshift|${up_gene_symbol}|${transcript}' ${name}_int/0000_annot.vcf >> ${name}_core_int1.vcf
+    grep 'stop_gained|${up_gene_symbol}|${transcript}' ${name}_int/0000_annot.vcf >> ${name}_core_int1.vcf 
+    grep 'splice_donor|${up_gene_symbol}|${transcript}' ${name}_int/0000_annot.vcf >> ${name}_core_int1.vcf
+    grep 'splice_acceptor|${up_gene_symbol}|${transcript}' ${name}_int/0000_annot.vcf >> ${name}_core_int1.vcf
+    grep 'inframe_insertion|${up_gene_symbol}|${transcript}' ${name}_int/0000_annot.vcf >> ${name}_core_int1.vcf
+    grep 'inframe_deletion|${up_gene_symbol}|${transcript}' ${name}_int/0000_annot.vcf >> ${name}_core_int1.vcf
+    grep 'start_lost|${up_gene_symbol}|${transcript}' ${name}_int/0000_annot.vcf >> ${name}_core_int1.vcf
+    grep 'stop_lost|${up_gene_symbol}|${transcript}' ${name}_int/0000_annot.vcf >> ${name}_core_int1.vcf
+    bcftools sort ${name}_core_int1.vcf | bgzip -c > ${name}_int/${name}_core.vcf.gz
+    tabix ${name}_int/${name}_core.vcf.gz
+
+    """
+    }
 }
 
 
