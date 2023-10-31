@@ -4,7 +4,6 @@ nextflow.enable.dsl=1
 
 gene_name = params.gene
 up_gene_symbol = gene_name.toUpperCase()
-println(up_gene_symbol)
 d_base = params.db_init
 res_base = params.res_init
 caller_base = params.caller_init
@@ -587,6 +586,7 @@ process get_core_var {
     path res_dir
     path res_base
     path ref_dir from Channel.value("${ref_dir_val}")
+    path caller_base
 
     output:
     set val(name), path("${name}_int") into (core_vars1, core_vars2)
@@ -616,17 +616,9 @@ process get_core_var {
     bcftools norm -m - ${name}_int/0002.vcf.gz | bcftools view -e 'GT="1/0"' | bcftools view -e 'GT="0/0"' > ${name}_int/${name}_core_int1.vcf
     bcftools csq -p m -v 0 -f ${ref_dir}/${ref_genome} -g ${res_base}/annotation/Homo_sapiens.GRCh38.110.gff3.gz ${name}_int/0000.vcf.gz -o ${name}_int/0000_annot.vcf
 
-    grep 'missense|${up_gene_symbol}|${transcript}' ${name}_int/0000_annot.vcf >> ${name}_int/${name}_core_int1.vcf
-    grep 'frameshift|${up_gene_symbol}|${transcript}' ${name}_int/0000_annot.vcf >> ${name}_int/${name}_core_int1.vcf
-    grep 'stop_gained|${up_gene_symbol}|${transcript}' ${name}_int/0000_annot.vcf >> ${name}_int/${name}_core_int1.vcf 
-    grep 'splice_donor|${up_gene_symbol}|${transcript}' ${name}_int/0000_annot.vcf >> ${name}_int/${name}_core_int1.vcf
-    grep 'splice_acceptor|${up_gene_symbol}|${transcript}' ${name}_int/0000_annot.vcf >> ${name}_int/${name}_core_int1.vcf
-    grep 'inframe_insertion|${up_gene_symbol}|${transcript}' ${name}_int/0000_annot.vcf >> ${name}_int/${name}_core_int1.vcf
-    grep 'inframe_deletion|${up_gene_symbol}|${transcript}' ${name}_int/0000_annot.vcf >> ${name}_int/${name}_core_int1.vcf
-    grep 'start_lost|${up_gene_symbol}|${transcript}' ${name}_int/0000_annot.vcf >> ${name}_int/${name}_core_int1.vcf
-    grep 'stop_lost|${up_gene_symbol}|${transcript}' ${name}_int/0000_annot.vcf >> ${name}_int/${name}_core_int1.vcf
-    // bcftools sort ${name}_int/${name}_core_int1.vcf -T ${name}_int | bgzip -c > ${name}_int/${name}_core.vcf.gz
-    // tabix ${name}_int/${name}_core.vcf.gz
+    python3 ${caller_base}/novel/core_var.py ${name}_int/0000_annot.vcf ${up_gene_symbol} ${transcript} >> ${name}_int/${name}_core_int1.vcf
+    bcftools sort ${name}_int/${name}_core_int1.vcf -T ${name}_int | bgzip -c > ${name}_int/${name}_core.vcf.gz
+    tabix ${name}_int/${name}_core.vcf.gz
 
     """
     }
