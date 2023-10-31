@@ -553,13 +553,36 @@ process get_core_var {
     set val(name), path("${name}_int") into (core_vars1, core_vars2, core_vars3)
 
     script:
- 
+
+    if (params.build=='b37') {
+
     """
     bcftools isec ${name}_vars/${name}_all_norm.vcf.gz ${res_dir}/allele_def_var.vcf.gz -p ${name}_int -Oz
     bcftools norm -m - ${name}_int/0002.vcf.gz | bcftools view -e 'GT="1/0"' | bcftools view -e 'GT="0/0"' | bgzip -c > ${name}_int/${name}_core.vcf.gz
     tabix ${name}_int/${name}_core.vcf.gz
+    """
+
+    } else if (params.build=='hg19') {
 
     """
+    bcftools isec ${name}_vars/${name}_all_norm.vcf.gz ${res_dir}/allele_def_var.vcf.gz -p ${name}_int -Oz
+    bcftools norm -m - ${name}_int/0002.vcf.gz | bcftools view -e 'GT="1/0"' | bcftools view -e 'GT="0/0"' | bgzip -c > ${name}_int/${name}_core.vcf.gz
+    tabix ${name}_int/${name}_core.vcf.gz
+    """
+
+    } else {
+
+    """
+    bcftools isec ${name}_vars/${name}_all_norm.vcf.gz ${res_dir}/allele_def_var.vcf.gz -p ${name}_int -Oz
+    bcftools norm -m - ${name}_int/0002.vcf.gz | bcftools view -e 'GT="1/0"' | bcftools view -e 'GT="0/0"' > ${name}_int/${name}_core_int1.vcf
+    bcftools csq -p m -v 0 -f ${ref_dir}/${ref_genome} -g ${res_base}/annotation/Homo_sapiens.GRCh38.110.gff3.gz ${name}_int/0000.vcf.gz -o ${name}_int/0000_annot.vcf
+
+    python3 ${caller_base}/novel/core_var.py ${name}_int/0000_annot.vcf ${up_gene_symbol} ${transcript} >> ${name}_int/${name}_core_int1.vcf
+    bcftools sort ${name}_int/${name}_core_int1.vcf -T ${name}_int | bgzip -c > ${name}_int/${name}_core.vcf.gz
+    tabix ${name}_int/${name}_core.vcf.gz
+
+    """
+    }
 
 }
 
