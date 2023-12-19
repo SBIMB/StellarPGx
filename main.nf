@@ -603,7 +603,7 @@ process get_core_var {
     path caller_base
 
     output:
-    set val(name), path("${name}_int") into (core_vars1, core_vars2)
+    tuple val(name), path("${name}_int") into (core_vars1, core_vars2)
 
     script:
  
@@ -721,7 +721,7 @@ process call_stars {
     path caller_dir
 
     output:
-    set val(name), file("${name}_${gene_name}.alleles")
+    tuple val(name), file("${name}_${gene_name}.alleles")
 
     script:
    
