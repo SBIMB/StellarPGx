@@ -603,7 +603,7 @@ process get_core_var {
     path caller_base
 
     output:
-    tuple val(name), path("${name}_int") into (core_vars1, core_vars2)
+    tuple val(name), path("${name}_int")
 
     script:
  
