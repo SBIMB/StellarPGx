@@ -1,6 +1,6 @@
 #!/usr/bin/env nextflow
 
-nextflow.enable.dsl=2
+nextflow.enable.dsl=1
 
 gene_name = params.gene
 up_gene_symbol = gene_name.toUpperCase()
@@ -377,47 +377,26 @@ if (params.format=='compressed') {
 }
 
 
-// align_file = Channel.fromFilePairs(params.in_bam, type: 'file') {  file -> file.name.replaceAll(/.${ext}|.${ind}$/,'') }
+align_file = Channel.fromFilePairs(params.in_bam, type: 'file') {  file -> file.name.replaceAll(/.${ext}|.${ind}$/,'') }
 
-// align_file.into { data1; data2; data3; data4; data5 }
+align_file.into { data1; data2; data3; data4; data5 }
 
 
 ref_dir_val = new File("${params.ref_file}").getParent()
 ref_genome = new File("${params.ref_file}").getName()
 
-workflow {
-    ref_ch = Channel.value("${ref_dir_val}")
-    data_ch = Channel.fromFilePairs(params.in_bam, type: 'file') {  file -> file.name.replaceAll(/.${ext}|.${ind}$/,'') }
-    call_snvs1(data_ch, ref_ch, res_dir)
-    call_snvs2(data_ch, ref_ch)
-    call_sv_del(data_ch, ref_ch, res_dir)
-    call_sv_dup(data_ch, ref_ch, res_dir)
-    get_depth(data_ch, ref_ch, res_dir)
-    call_snvs1.out.join(call_snvs2.out).set {var_ch_joined}
-    format_snvs(var_ch_joined)
-    get_core_var(format_snvs.out, res_dir, res_base, ref_ch, caller_base)
-    analyse_1(call_sv_del.out)
-    call_sv_dup.out.join(get_core_var.out).set {dup_int}
-    analyse_2(dup_int)
-    format_snvs.out.join(get_core_var.out).set {dip_req}
-    analyse3(dip_req)
-    analyse3.out.join(analyse_1.out).set {fin_files1}
-    fin_files1.join(analyse_2.out).set {fin_files2}
-    fin_files2.join(get_depth.out).set {fin_files}
-    call_stars(fin_files, db, caller_dir)
-}
 
 
 process call_snvs1 {
 //   maxForks 10
 
     input:
-    tuple val(name), path(bam)
-    path ref_dir
+    set val(name), file(bam) from data1
+    path ref_dir from Channel.value("${ref_dir_val}")
     path res_dir
 
     output:	        
-    tuple val(name), path("${name}_var_1")
+    set val(name), path("${name}_var_1") into var_ch1
       
     script:
     ext1 = bam[0].getExtension()
@@ -448,11 +427,11 @@ process call_snvs2 {
 //   maxForks 10
 
     input:
-    tuple val(name), path(bam)
-    path ref_dir
+    set val(name), file(bam) from data2
+    path ref_dir from Channel.value("${ref_dir_val}")
 
     output: 
-    tuple val(name), path("${name}_var_2")
+    set val(name), path("${name}_var_2") into var_ch2
 
     script:
     ext1 = bam[0].getExtension()
@@ -483,12 +462,12 @@ process call_sv_del {
 //   maxForks 10
 
     input:
-    tuple val(name), path(bam)
-    path ref_dir
+    set val(name), file(bam) from data3
+    path ref_dir from Channel.value("${ref_dir_val}")
     path res_dir
 
     output:
-    tuple val(name), path("${name}_sv_del") 
+    set val(name), path("${name}_sv_del") into sv_ch1
 
     script:
     ext1 = bam[0].getExtension()
@@ -515,12 +494,12 @@ process call_sv_dup {
 //   maxForks 10
 
     input:
-    tuple val(name), path(bam)
-    path ref_dir
+    set val(name), file(bam) from data4
+    path ref_dir from Channel.value("${ref_dir_val}")
     path res_dir
 
     output:
-    tuple val(name), path("${name}_sv_dup") 
+    set val(name), path("${name}_sv_dup") into sv_ch2
 
     script:
     ext1 = bam[0].getExtension()
@@ -547,12 +526,12 @@ process get_depth {
 //   maxForks 10
 
     input:
-    tuple val(name), path(bam)
-    path ref_dir
+    set val(name), file(bam) from data5
+    path ref_dir from Channel.value("${ref_dir_val}")
     path res_dir
 
     output:
-    tuple val(name), path("${name}_${gene_name}_ctrl.depth")
+    set val(name), file("${name}_${gene_name}_ctrl.depth") into sv_ch3
 
     script:
 
@@ -564,19 +543,21 @@ process get_depth {
 }
 
 
+var_ch1.join(var_ch2).set { var_ch_joined }
+
+
 process format_snvs {
 //   maxForks 10
 
     publishDir "$output_folder/$gene_name/variants", pattern: '*vcf.gz', mode: 'copy', overwrite: 'true'
     publishDir "$output_folder/$gene_name/variants", pattern: '*vcf.gz.tbi', mode: 'copy', overwrite: 'true'    
 
-    publishDir "$output_folder/$gene_name/variants", mode: 'copy', overwrite: 'true', saveAs: { ${name}_var/${name}_all_norm.vcf.gz -> "${name}_${gene_name}.vcf.gz" }
-
     input:
-    tuple val(name), path("${name}_var_1"), path("${name}_var_2")
+    set val(name), path("${name}_var_1"), path("${name}_var_2") from var_ch_joined
 
     output:
-    tuple val(name), path("*")
+    set val(name), path("${name}_var") into (var_norm1, var_norm2)
+    set val(name), file("${name}_${gene_name}.vcf.gz"), file("${name}_${gene_name}.vcf.gz.tbi") into var_norm3
 
     script:
 
@@ -586,6 +567,8 @@ process format_snvs {
         tabix ${name}_var/${name}_${region_b2}.vcf.gz
         bcftools norm -m - ${name}_var/${name}_${region_b2}.vcf.gz | bcftools view -e 'GT="1/0"' | bcftools view -e 'GT="0/0"' | bcftools view -e 'FILTER="PASS" & INFO/QD<10 || 0<ABHet<0.25' | bgzip -c > ${name}_var/${name}_all_norm.vcf.gz
         tabix ${name}_var/${name}_all_norm.vcf.gz
+	cp ${name}_var/${name}_all_norm.vcf.gz ./${name}_${gene_name}.vcf.gz
+	cp ${name}_var/${name}_all_norm.vcf.gz.tbi ./${name}_${gene_name}.vcf.gz.tbi
 
     """
 
@@ -599,10 +582,10 @@ process get_core_var {
     tag "${name}"   
 
     input:
-    tuple val(name), path("${name}_vars")
+    set val(name), path("${name}_vars") from var_norm1
     path res_dir
     path res_base
-    path ref_dir
+    path ref_dir from Channel.value("${ref_dir_val}")
     path caller_base
 
     output:
@@ -650,10 +633,10 @@ process analyse_1 {
     tag "${name}"
 
     input:
-    tuple val(name), path("${name}_gene_del")
+    set val(name), path("${name}_gene_del") from sv_ch1
 
     output:
-    tuple val(name), path("${name}_gene_del/${name}_gene_del_summary.txt") 
+    set val(name), path("${name}_gene_del/${name}_gene_del_summary.txt") into del_ch
 
     script:
 
@@ -664,6 +647,8 @@ process analyse_1 {
 }
 
 
+sv_ch2.join(core_vars1).set {dup_int}
+
 process analyse_2 {
 //   maxForks 10
 
@@ -671,10 +656,10 @@ process analyse_2 {
     tag "${name}"
 
     input:
-    tuple val(name), path("${name}_gene_dup"), path("${name}_int") 
+    set val(name), path("${name}_gene_dup"), path("${name}_int") from dup_int
 
     output:
-    tuple val(name), path("${name}_gene_dup/${name}_gene_dup_summary.txt") 
+    set val(name), path("${name}_gene_dup/${name}_gene_dup_summary.txt") into dup_ch
 
     script:
 
@@ -687,6 +672,8 @@ process analyse_2 {
 }
 
 
+var_norm2.join(core_vars2).set {dip_req}
+
 process analyse_3 {
 //   maxForks 10
 
@@ -694,10 +681,10 @@ process analyse_3 {
     tag "${name}"
 
     input:
-    tuple val(name), path("${name}_vars"), path("${name}_int") 
+    set val(name), path("${name}_vars"), path("${name}_int") from dip_req
 
     output:
-    tuple val(name), path("${name}_vars/${name}_core_snvs.dip"), path("${name}_vars/${name}_full.dip"), path("${name}_vars/${name}_gt.dip") 
+    set val(name), path("${name}_vars/${name}_core_snvs.dip"), path("${name}_vars/${name}_full.dip"), path("${name}_vars/${name}_gt.dip") into prep_ch
 
     script:
     """
@@ -710,6 +697,11 @@ process analyse_3 {
 }
 
 
+prep_ch.join(del_ch).set {fin_files1}
+fin_files1.join(dup_ch).set {fin_files2}
+fin_files2.join(sv_ch3).set {fin_files}
+
+
 process call_stars {
 //   maxForks 10
 
@@ -719,12 +711,12 @@ process call_stars {
     tag "${name}"
 
     input:
-    tuple val(name), path("${name}_vars/${name}_core_snvs.dip"), path("${name}_vars/${name}_full.dip"), path("${name}_vars/${name}_gt.dip"), path("${name}_gene_del/${name}_gene_del_summary.txt"), path("${name}_gene_dup/${name}_gene_dup_summary.txt"), file("${name}_${gene_name}_dp")
+    set val(name), path("${name}_vars/${name}_core_snvs.dip"), path("${name}_vars/${name}_full.dip"), path("${name}_vars/${name}_gt.dip"), path("${name}_gene_del/${name}_gene_del_summary.txt"), path("${name}_gene_dup/${name}_gene_dup_summary.txt"), file("${name}_${gene_name}_dp") from fin_files
     path db
     path caller_dir
 
     output:
-    set val(name), file("${name}_${gene_name}.alleles")
+    set val(name), file("${name}_${gene_name}.alleles") into star_ch
 
     script:
    
