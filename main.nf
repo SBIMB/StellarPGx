@@ -567,10 +567,7 @@ process get_depth {
 process format_snvs {
 //   maxForks 10
 
-    publishDir "$output_folder/$gene_name/variants", pattern: '*vcf.gz', mode: 'copy', overwrite: 'true'
-    publishDir "$output_folder/$gene_name/variants", pattern: '*vcf.gz.tbi', mode: 'copy', overwrite: 'true'    
-
-    publishDir "$output_folder/$gene_name/variants", mode: 'copy', overwrite: 'true', saveAs: { ${name}_var/${name}_all_norm.vcf.gz -> "${name}_${gene_name}.vcf.gz" }
+//    publishDir "$output_folder/$gene_name/variants", mode: 'copy', overwrite: 'true', saveAs: { ${name}_var/${name}_all_norm.vcf.gz -> "${name}_${gene_name}.vcf.gz" }
 
     input:
     tuple val(name), path("${name}_var_1"), path("${name}_var_2")
