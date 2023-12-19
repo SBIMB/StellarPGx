@@ -400,8 +400,8 @@ workflow {
     call_sv_dup.out.join(get_core_var.out).set {dup_int}
     analyse_2(dup_int)
     format_snvs.out.join(get_core_var.out).set {dip_req}
-    analyse3(dip_req)
-    analyse3.out.join(analyse_1.out).set {fin_files1}
+    analyse_3(dip_req)
+    analyse_3.out.join(analyse_1.out).set {fin_files1}
     fin_files1.join(analyse_2.out).set {fin_files2}
     fin_files2.join(get_depth.out).set {fin_files}
     call_stars(fin_files, db, caller_dir)
