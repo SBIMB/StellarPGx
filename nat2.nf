@@ -321,7 +321,7 @@ if (params.build=='b37') {
        region_a2 = "018386000-018402000"
        region_b1 = "chr8:18386000-18402000"
        region_b2 = "018386000-018402000"
-
+       transcript = "ENST00000286479"
     }
 
 
