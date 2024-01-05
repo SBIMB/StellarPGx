@@ -520,36 +520,6 @@ process format_snvs {
     set val(name), path("${name}_var_1"), path("${name}_var_2") from var_ch_joined
 
     output:
-    set val(name), path("${name}_var") into (var_norm1, var_norm2)
-    set val(name), file("${name}_${gene_name}.vcf.gz"), file("${name}_${gene_name}.vcf.gz.tbi") into var_norm3
-
-    script:
-
-    """
-        bcftools isec -p ${name}_var -Oz ${name}_var_1/${chrom}/${region_a2}.vcf.gz ${name}_var_2/${chrom}/${region_a2}.vcf.gz
-        bcftools concat -a -D -r ${region_b1} ${name}_var/0000.vcf.gz ${name}_var/0001.vcf.gz ${name}_var/0002.vcf.gz -Oz -o ${name}_var/${name}_${region_b2}.vcf.gz
-        tabix ${name}_var/${name}_${region_b2}.vcf.gz
-        bcftools norm -m - ${name}_var/${name}_${region_b2}.vcf.gz | bcftools view -e 'GT="1/0"' | bcftools view -e 'GT="0/0"' | bcftools view -e 'FILTER="PASS" & INFO/QD<10 || 0<ABHet<0.25' | bgzip -c > ${name}_var/${name}_all_norm.vcf.gz
-        tabix ${name}_var/${name}_all_norm.vcf.gz
-	cp ${name}_var/${name}_all_norm.vcf.gz ./${name}_${gene_name}.vcf.gz
-	cp ${name}_var/${name}_all_norm.vcf.gz.tbi ./${name}_${gene_name}.vcf.gz.tbi
-
-    """
-
-}
-
-
-process get_core_var {
-//   maxForks 10
-   
-    errorStrategy 'ignore'
-    tag "${name}"   
-
-    input:
-    set val(name), path("${name}_vars") from var_norm1
-    path res_dir
-
-    output:
     set val(name), path("${name}_int") into (core_vars1, core_vars2, core_vars3)
 
     script:
