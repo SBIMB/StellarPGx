@@ -548,6 +548,7 @@ process get_core_var {
     input:
     set val(name), path("${name}_vars") from var_norm1
     path res_dir
+    path ref_dir from Channel.value("${ref_dir_val}")
 
     output:
     set val(name), path("${name}_int") into (core_vars1, core_vars2, core_vars3)
