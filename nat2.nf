@@ -3,6 +3,7 @@
 nextflow.enable.dsl=1
 
 gene_name = params.gene
+up_gene_symbol = gene_name.toUpperCase()
 d_base = params.db_init
 res_base = params.res_init
 caller_base = params.caller_init
