@@ -360,6 +360,18 @@ if (params.build=='b37') {
        transcript = "ENST00000612885"
     }
 
+
+    } else if (params.gene=='slco1b1') {
+       chrom = "chr12"
+       region_a1 = "chr12:21120000-21250000"
+       region_a2 = "021120000-021250000"
+       region_b1 = "chr12:21120000-21250000"
+       region_b2 = "021120000-021250000"
+       transcript = "ENST00000256958"
+    }
+
+
+
 }
 
 params.format='binary'
