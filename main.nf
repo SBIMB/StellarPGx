@@ -405,6 +405,7 @@ workflow {
     get_depth(data_ch, ref_ch, res_dir)
     call_snvs1.out.join(call_snvs2.out).set {var_ch_joined}
     format_snvs(var_ch_joined)
+    save_vcfs(format_snvs.out)
     get_core_var(format_snvs.out, res_dir, res_base, ref_ch, caller_base)
     analyse_1(call_sv_del.out)
     call_sv_dup.out.join(get_core_var.out).set {dup_int}
@@ -598,6 +599,28 @@ process format_snvs {
 
 }
 
+
+process save_vcfs {
+
+    publishDir "$output_folder/$gene_name/variants", pattern: '*vcf.gz', mode: 'copy', overwrite: 'true'
+    publishDir "$output_folder/$gene_name/variants", pattern: '*vcf.gz.tbi', mode: 'copy', overwrite: 'true'
+
+    errorStrategy 'ignore'
+    tag "${name}"
+
+    input:
+    tuple val(name), path("${name}_vars")
+
+    output:
+    tuple val(name), path("*")
+
+    script:
+    """
+    cp ${name}_vars/${name}_all_norm.vcf.gz ./${name}_${gene_name}.vcf.gz
+    cp ${name}_vars/${name}_all_norm.vcf.gz.tbi ./${name}_${gene_name}.vcf.gz.tbi
+    """
+
+}
 
 process get_core_var {
 //   maxForks 10
