@@ -1,0 +1,9 @@
+
+version: 1.2.6.1
+tools:
+  - subclass: Nextflow
+    primaryDescriptorPath: 'StellarPGx'
+    testParameterFiles: 'nextflow.config'
+    authors:
+      - name: 'David Twesigomwe'
+        email: 'twesigomwedavid@gmail.com'
