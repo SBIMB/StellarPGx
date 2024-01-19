@@ -1,9 +1,9 @@
 
 version: 1.2.6.1
-tools:
-  - subclass: Nextflow
-    primaryDescriptorPath: '/nextflow.config'
-    testParameterFiles: 'nextflow.config'
+workflows:
+  - subclass: NFL
+    primaryDescriptorPath: /nextflow.config
+    name: StellarPGx
     authors:
       - name: 'David Twesigomwe'
         email: 'twesigomwedavid@gmail.com'
