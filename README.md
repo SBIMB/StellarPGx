@@ -4,7 +4,7 @@
 
 CYP450 genes supported: *CYP2D6*, *CYP2A6*, *CYP2B6*, *CYP2C19*, *CYP2C9*, *CYP2C8*, *CYP3A4*, *CYP3A5*, *CYP1A1*, *CYP1A2*, *CYP2E1*, and *CYP4F2*
 
-Other pharmacogenes supported: *CYPOR* (*POR*), *NAT1*, *NAT2*, *GSTM1*, and *GSTT1*
+Other pharmacogenes supported: *CYPOR* (*POR*), *NAT1*, *NAT2*, *GSTM1*, *GSTT1*, and *SLCO1B1*
 
 StellarPGx is built using [`Nextflow`](https://www.nextflow.io), a workflow management system that facilitates parallelisation, scalability, reproducibility and portability of pipelines via [`Docker`](https://docs.docker.com) and [`Singularity`](https://sylabs.io/) technologies.
 
