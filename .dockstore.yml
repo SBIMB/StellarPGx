@@ -2,7 +2,7 @@
 version: 1.2.6.1
 tools:
   - subclass: Nextflow
-    primaryDescriptorPath: 'StellarPGx'
+    primaryDescriptorPath: '/nextflow.config'
     testParameterFiles: 'nextflow.config'
     authors:
       - name: 'David Twesigomwe'
