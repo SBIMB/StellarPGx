@@ -1,9 +1,9 @@
-
-version: 1.2.6.1
+version: 1.2
 workflows:
-  - subclass: NFL
-    primaryDescriptorPath: /nextflow.config
-    name: StellarPGx
-    authors:
-      - name: 'David Twesigomwe'
-        email: 'twesigomwedavid@gmail.com'
+   - subclass: NFL
+     primaryDescriptorPath: /nextflow.config
+     name: StellerPGx
+     authors:
+      - name: David Twesigomwe
+        email: david.twesigomwe@wits.ac.za
+     publish: True
