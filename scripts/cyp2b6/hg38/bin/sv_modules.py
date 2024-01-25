@@ -105,7 +105,7 @@ def dup_test_init(sv_dup, av_cov):
 
     for i in het_hom_list:
         supp_reads = round(float(i[-2])*int(i[2]))
-        i.append(round(supp_reads/norm_cov, 3))
+        i.append(round(supp_reads/av_read_cov, 4))
         i.append(supp_reads)
         het_hom_list_new.append(i)
 
