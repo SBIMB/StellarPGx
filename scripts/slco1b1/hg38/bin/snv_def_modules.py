@@ -164,7 +164,7 @@ def cand_snv_allele_calling(database, infile, infile_full, infile_full_gt, infil
                 amb_soln_set = sorted(set(amb_soln_set))
                     
                 allele_res =  " or ".join(amb_soln_set) 
-                return [soln_list1, allele_res];
+                return [soln_list1, soln_list1, allele_res];
         
 
             elif score.count(min_score) >= 2:
@@ -188,7 +188,7 @@ def cand_snv_allele_calling(database, infile, infile_full, infile_full_gt, infil
                 amb_soln_set = sorted(set(amb_soln_set))
                     
                 allele_res = " or ".join(amb_soln_set)
-                return [soln_list1, allele_res];
+                return [soln_list1, soln_list1, allele_res];
 
 
             else:
@@ -309,7 +309,7 @@ def cand_snv_allele_calling(database, infile, infile_full, infile_full_gt, infil
                 amb_soln_set = sorted(set(amb_soln_set))
 
                 allele_res = " or ".join(amb_soln_set)
-                return [soln_list1, allele_res];
+                return [soln_list1, soln_list1, allele_res];
 
 
             else:
