@@ -95,7 +95,6 @@ def cand_snv_allele_calling(database, infile, infile_full, infile_full_gt, infil
 
 
     elif len(soln_list1) == 2:
-        print(soln_list1)
         diplo1 = soln_list1[0]
         diplo2 = soln_list1[1]
         diplo1_supp_var = soln_list2[0].split(";")
@@ -186,13 +185,19 @@ def cand_snv_allele_calling(database, infile, infile_full, infile_full_gt, infil
                     amb_soln_set.append(result_dip)
 
                 amb_soln_set = sorted(set(amb_soln_set))
-                    
-                allele_res = " or ".join(amb_soln_set)
-                return [soln_list1, soln_list1, allele_res];
+
+                if len(amb_soln_set) == 1:
+                    minpos = min_score_pos[0]
+                    best_cand_haps = tiebreak3[minpos]
+                    return [soln_list1, best_cand_haps, amb_soln_set[0]];
+
+                else:
+                    allele_res = " or ".join(amb_soln_set)
+                    return [soln_list1, soln_list1, allele_res];
 
 
             else:
-                minpos = score.index(min_score)
+                minpos = min_score_pos[0]
                 best_diplo = tiebreak1[minpos]
                 best_cand_haps = tiebreak3[minpos] 
                 res1 = [i for i in range(len(best_diplo)) if best_diplo.startswith("_", i)]
@@ -308,12 +313,20 @@ def cand_snv_allele_calling(database, infile, infile_full, infile_full_gt, infil
 
                 amb_soln_set = sorted(set(amb_soln_set))
 
-                allele_res = " or ".join(amb_soln_set)
-                return [soln_list1, soln_list1, allele_res];
+
+                if len(amb_soln_set) == 1:
+                    minpos = min_score_pos[0]
+                    best_cand_haps = tiebreak3[minpos]
+                    return [soln_list1, best_cand_haps, amb_soln_set[0]];
+
+                else:
+                    allele_res = " or ".join(amb_soln_set)
+                    return [soln_list1, soln_list1, allele_res];
+
 
 
             else:
-                minpos = score.index(min_score)
+                minpos = min_score_pos[0]
                 best_diplo = tiebreak1[minpos]
                 best_cand_haps = tiebreak3[minpos]
                 res1 = [i for i in range(len(best_diplo)) if best_diplo.startswith("_", i)]

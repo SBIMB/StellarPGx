@@ -66,7 +66,6 @@ best_diplos = snv_def_calls[0]
 print("\nCandidate alleles:")
 print(best_diplos)
 
-
 snv_def_alleles = snv_def_calls[-1]
 
 if "or" in snv_def_alleles:
@@ -82,8 +81,8 @@ print("\nResult:")
 
 
 av_cov = get_total_CN(cov_file)[1]
-cov_e1_int4 = get_total_CN(cov_file)[3]
-cov_int4_e9 = get_total_CN(cov_file)[4]
+cov_e1_int2 = get_total_CN(cov_file)[3]
+cov_int7_e16 = get_total_CN(cov_file)[4]
 
 
 gene_alleles = ""
@@ -92,16 +91,15 @@ gene_alleles = ""
 if snv_def_alleles != '*1/*1' and cn != '0':
     in_list = dup_test_init(sv_dup, av_cov)
 
-
 # if cn == '2' and snv_def_alleles == '*1/*1':
 
-
 if cn == '2':
-
+    
     if 'or' in snv_def_alleles:        
         print (snv_def_alleles)
 
     else:
+        
         snv_def_alleles = snv_def_alleles.split("/")
 
         if snv_def_alleles[0] == '*1' or snv_def_alleles[1] == '*1':
@@ -191,9 +189,8 @@ elif cn == '1':
 
 elif (int(cn) == 3 or int(cn) == 4) and snv_def_alleles != None:
 
-    # in_list = dup_test_init(sv_dup, av_cov)
-    # print (snv_def_alleles)
-    # print (snv_cand_alleles)
+    in_list = dup_test_init(sv_dup, av_cov)
+
     orig = snv_def_alleles
 
     if "or" in snv_def_alleles:
@@ -205,11 +202,9 @@ elif (int(cn) == 3 or int(cn) == 4) and snv_def_alleles != None:
         snv_cand_alleles = snv_cand_alleles.split("_")
 
         if snv_def_alleles[0] != snv_def_alleles[1]:
-            # print("\n" + dup_test(sv_dup, hap_dbs, snv_def_alleles[0], snv_def_alleles[1], cn))
-            # print (snv_cand_alleles)
-            # print ("\n")
+            
             phased_dup = dup_test_cn_3_4(sv_dup, hap_dbs, snv_cand_alleles[0], snv_cand_alleles[1], snv_def_alleles[0], snv_def_alleles[1], cn, av_cov, in_list)
-
+            
             phased_dup1 = phased_dup.split("/")
 
 
