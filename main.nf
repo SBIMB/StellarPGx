@@ -375,6 +375,8 @@ if (params.build=='b37') {
        region_b2 = "048037500-048055000"
        transcript = "ENST00000258662"
 
+    }
+
 }
 
 params.format='binary'
