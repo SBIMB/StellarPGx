@@ -366,9 +366,14 @@ if (params.build=='b37') {
        region_b1 = "chr12:21120000-21250000"
        region_b2 = "021120000-021250000"
        transcript = "ENST00000256958"
-    }
-
-
+       
+    }  else if (params.gene=='nudt15') {
+       chrom = "chr13"
+       region_a1 = "chr13:48037500-48055000"
+       region_a2 = "048037500-048055000"
+       region_b1 = "chr13:48037500-48055000"
+       region_b2 = "048037500-048055000"
+       transcript = "ENST00000258662"
 
 }
 
