@@ -523,7 +523,7 @@ process call_sv_del {
         sam_ind='bai'
       
     """
-    graphtyper genotype_sv ${ref_dir}/${ref_genome} --sam=${name}.${ext} --region=${region_a1} --output=${name}_sv_del ${res_dir}/sv_test.vcf.gz ${cram_options}
+    graphtyper genotype_sv ${ref_dir}/${ref_genome} --sam=${name}.${ext} --region=${region_a1} --output=${name}_sv_del ${res_dir}/sv_test.vcf.gz 
 
     """
 
@@ -555,7 +555,7 @@ process call_sv_dup {
         sam_ind='bai'  
 
     """
-    graphtyper genotype_sv ${ref_dir}/${ref_genome} --sam=${name}.${ext} --region=${region_a1} --output=${name}_sv_dup ${res_dir}/sv_test3.vcf.gz ${cram_options}
+    graphtyper genotype_sv ${ref_dir}/${ref_genome} --sam=${name}.${ext} --region=${region_a1} --output=${name}_sv_dup ${res_dir}/sv_test3.vcf.gz 
 
     """
 }
