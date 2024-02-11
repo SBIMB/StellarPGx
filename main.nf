@@ -672,7 +672,8 @@ process get_core_var {
 
     bcftools isec ${name}_vars/${name}_all_norm_annot.vcf.gz ${res_dir}/allele_def_var.vcf.gz -p ${name}_int -Oz
     bcftools norm -m - ${name}_int/0002.vcf.gz | bcftools view -e 'GT="1/0"' | bcftools view -e 'GT="0/0"' > ${name}_int/${name}_core_int1.vcf
-
+    
+    bgzip -d ${name}_int/0000.vcf.gz
     python3 ${caller_base}/novel/core_var.py ${name}_int/0000.vcf ${up_gene_symbol} ${transcript} >> ${name}_int/${name}_core_int1.vcf
     bcftools sort ${name}_int/${name}_core_int1.vcf -T ${name}_int | bgzip -c > ${name}_int/${name}_core.vcf.gz
     tabix ${name}_int/${name}_core.vcf.gz
