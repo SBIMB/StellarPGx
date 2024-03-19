@@ -4,7 +4,7 @@
 
 CYP450 genes supported: *CYP2D6*, *CYP2A6*, *CYP2B6*, *CYP2C19*, *CYP2C9*, *CYP2C8*, *CYP3A4*, *CYP3A5*, *CYP1A1*, *CYP1A2*, *CYP2E1*, and *CYP4F2*
 
-Other pharmacogenes supported: *CYPOR* (*POR*), *NAT1*, *NAT2*, *GSTM1*, *GSTT1*, and *SLCO1B1*
+Other pharmacogenes supported: *CYPOR* (*POR*), *NAT1*, *NAT2*, *GSTM1*, *GSTT1*, *SLCO1B1*, *NUDT15*, *TPMT*, and *UGT1A1*
 
 StellarPGx is built using [`Nextflow`](https://www.nextflow.io), a workflow management system that facilitates parallelisation, scalability, reproducibility and portability of pipelines via [`Docker`](https://docs.docker.com) and [`Singularity`](https://sylabs.io/) technologies.
 
@@ -58,7 +58,7 @@ mv nextflow $HOME/bin
 
 #### Singularity or Docker:
 
-For Singularity installation, please refer to the excellent documentation [here](https://sylabs.io/guides/3.0/user-guide/installation.html)). Ensure that your Singularity installation allows `user defined binds` - set by your system administrator (See [Singularity config file](https://sylabs.io/guides/3.0/user-guide/installation.html) documentation) 
+For Singularity installation, please refer to the excellent documentation [here](https://sylabs.io/guides/3.0/user-guide/installation.html)). Ensure that your Singularity installation allows `user-defined binds` - set by your system administrator (See [Singularity config file](https://sylabs.io/guides/3.0/user-guide/installation.html) documentation) 
 
 
 For Docker installation, please refer to the excellent documentation [here](https://docs.docker.com/get-docker))
