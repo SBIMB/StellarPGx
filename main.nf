@@ -375,7 +375,24 @@ if (params.build=='b37') {
        region_b2 = "048037500-048055000"
        transcript = "ENST00000258662"
 
+    }  else if (params.gene=='tpmt') {
+       chrom = "chr6"
+       region_a1 = "chr6:18128000-18155500"
+       region_a2 = "018128000-018155500"
+       region_b1 = "chr6:18128500-18155000"
+       region_b2 = "018128500-018155000"
+       transcript = "ENST00000309983"
+
+    }  else if (params.gene=='ugt1a1') {
+       chrom = "chr2"
+       region_a1 = "chr2:233758500-233772600"
+       region_a2 = "233758500-233772600"
+       region_b1 = "chr2:233759000-233772000"
+       region_b2 = "233759000-233772000"
+       transcript = "ENST00000305208"
+
     }
+
 
 }
 
