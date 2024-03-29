@@ -300,16 +300,16 @@ def dup_test_cn_n(sv_dup, hap_dbs, cand_allele1, cand_allele2, test_allele1, tes
     return res_dip
 
 
-def hybrid_TPMT_hyb_test1(cov_e1_e2, cov_e3_e5):
+def hybrid_UGT1A1_hyb_test1(cov_e1_e2, cov_e3_e5):
 
     if 0.85 < float(cov_e1_e2)/float(cov_e3_e5) < 1.2:
         return 'norm_var'
 
     elif 0.45 < float(cov_e1_e2)/float(cov_e3_e5) < 0.75:
-        return 'hyb_TPMT_hyb'
+        return 'hyb_UGT1A1_hyb'
 
     elif float(cov_e1_e2)/float(cov_e3_e5) < 0.15:
-        return 'hyb_TPMT_hyb_2'
+        return 'hyb_UGT1A1_hyb_2'
 
     else:
         return 'norm_var'
