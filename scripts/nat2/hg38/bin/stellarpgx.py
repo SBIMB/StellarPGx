@@ -89,7 +89,7 @@ av_cov = get_total_CN(cov_file)[1]
 gene_alleles = ""
 
 
-if snv_def_alleles != '*12A/*12A' and cn != '0':
+if snv_def_alleles != '*1/*1' and cn != '0':
     in_list = dup_test_init(sv_dup, av_cov)
 
 
@@ -108,7 +108,7 @@ def resolve_haps (hap_snvs_file, hap_dbs_file):
             line = line.strip().split()
             if line[-1] == haps[0]:
                 allele1 = line[0]
-                allele2 = "*12A"
+                allele2 = "*1"
 
             else:
                 pass
@@ -128,11 +128,8 @@ def resolve_haps (hap_snvs_file, hap_dbs_file):
     return allele1 + "/" + allele2    
 
 if cn == '2':
-
-    if 'or' in snv_def_alleles and supp_core_vars == '18400194~G>A~0/1;18400285~C>T~0/1;18400806~G>A~1/1;18400860~G>A~0/1':
-        gene_alleles = '*14A/*7B'
         
-    elif 'or' in snv_def_alleles:
+    if 'or' in snv_def_alleles:
         
         gene_alleles = resolve_haps(hap_snvs, hap_dbs)
         print(gene_alleles)

@@ -300,32 +300,3 @@ def dup_test_cn_n(sv_dup, hap_dbs, cand_allele1, cand_allele2, test_allele1, tes
     return res_dip
 
 
-# def hybrid_29_test1(cov_e1_int4, cov_int4_e9):
-
-#     if 0.85 < float(cov_e1_int4)/float(cov_int4_e9) < 1.2:
-#         return 'norm_var'
-
-#     elif 0.45 < float(cov_e1_int4)/float(cov_int4_e9) < 0.75:
-#         return 'hyb_29'
-
-#     elif float(cov_e1_int4)/float(cov_int4_e9) < 0.15:
-#         return 'hyb_29_2'
-
-#     else:
-#         return 'norm_var'
-
-
-# def hybrid_30_test1(cov_e1_int4, cov_int4_e9):
-
-#     if 0.85 < float(cov_e1_int4)/float(cov_int4_e9) < 1.2:
-#         return 'norm_var'
-
-#     elif 0.45 < float(cov_int4_e9)/float(cov_e1_int4) < 0.75:
-#         return 'hyb_30'
-
-#     elif float(cov_int4_e9)/float(cov_e1_int4) < 0.15:
-#         return 'hyb_30_2'
-
-#     else:
-#         return 'norm_var'
-

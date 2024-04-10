@@ -50,8 +50,8 @@ def get_backgroud_alleles(database, core_vars):
     diplo_vars2 = []
 
     if len(scores) == 0:
-        diplo1 = 'ref.v1_ref.v1'
-        allele_res = '*ref/*ref'
+        diplo1 = '1.v1_1.v1'
+        allele_res = '*1/*1'
 
     else:
         max_score = max(scores)

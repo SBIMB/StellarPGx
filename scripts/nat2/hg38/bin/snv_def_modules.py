@@ -17,7 +17,7 @@ def get_core_variants(infile, cn):
         core_vars = core_vars.replace("~0/1", "~1/1")
 
     if os.stat(infile).st_size == 0:
-        core_vars = "REF alleles for rs1208 in GRCh38"
+        core_vars = "Ref haplotype"
         
     return core_vars
 
@@ -41,8 +41,8 @@ def cand_snv_allele_calling(database, infile, infile_full, infile_full_gt, infil
         all_variants.append(line)
 
     if os.stat(infile).st_size == 0:
-        cand_res = ['12A.v1_12A.v1']
-        allele_res = "*12A/*12A"
+        cand_res = ['1.v1_1.v1']
+        allele_res = "*1/*1"
         return ["".join(cand_res), allele_res];
         sys.exit()
 
