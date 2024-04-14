@@ -438,11 +438,11 @@ workflow {
     analyse_2(dup_int)
     format_snvs.out.join(get_core_var.out).set {dip_req}
     analyse_3(dip_req)
-    analyse4(phase_snvs.out)
+    analyse_4(phase_snvs.out)
     analyse_3.out.join(analyse_1.out).set {fin_files1}
     fin_files1.join(analyse_2.out).set {fin_files2}
     fin_files2.join(get_depth.out).set {fin_files3}
-    fin_files3.join(analyse4.out).set {fin_files}
+    fin_files3.join(analyse_4.out).set {fin_files}
     call_stars(fin_files, db, caller_dir)
 }
 
