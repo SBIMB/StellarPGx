@@ -1,6 +1,6 @@
 #!/usr/bin/env nextflow
 
-nextflow.enable.dsl=1
+nextflow.enable.dsl=2
 
 gene_name = params.gene
 up_gene_symbol = gene_name.toUpperCase()
@@ -228,7 +228,8 @@ if (params.build=='b37') {
     	region_a1 = "chr22:42126000-42137500"
     	region_a2 = "042126000-042137500"
     	region_b1 = "chr22:42126300-42132400"
-    	region_b2 = "042126300-042132400" 
+    	region_b2 = "042126300-042132400"
+	transcript = "ENST00000645361"
 
     } else if (params.gene=='cyp2a6') {
         chrom = "chr19"
@@ -236,6 +237,7 @@ if (params.build=='b37') {
 	region_a2 = "040833541-040887450"
 	region_b1 = "chr19:40842750-40852250"
 	region_b2 = "040842750-040852250"
+	transcript = "ENST00000301141"
     
     } else if (params.gene=='cyp2b6') {
         chrom = "chr19"
@@ -243,6 +245,7 @@ if (params.build=='b37') {
 	region_a2 = "040981280-041028400"
 	region_b1 = "chr19:40988800-41016900"
 	region_b2 = "040988800-041016900"
+	transcript = "ENST00000324071"
 
     } else if (params.gene=='cyp2c19') {
         chrom = "chr10"
@@ -250,6 +253,7 @@ if (params.build=='b37') {
 	region_a2 = "094752750-094865500"
 	region_b1 = "chr10:94759250-94853000"
 	region_b2 = "094759250-094853000"
+	transcript = "ENST00000371321"
 
     } else if (params.gene=='cyp2c9') {
       	chrom = "chr10"
@@ -257,6 +261,7 @@ if (params.build=='b37') {
 	region_a2 = "094935000-094990000"
 	region_b1 = "chr10:94936000-94989200"
 	region_b2 = "094936000-094989200"
+	transcript = "ENST00000260682"
 
     } else if (params.gene=='cyp2c8') {
         chrom = "chr10"
@@ -264,13 +269,15 @@ if (params.build=='b37') {
 	region_a2 = "095026750-095079500"
 	region_b1 = "chr10:95037050-95069800"
 	region_b2 = "095037050-095069800"	
+	transcript = "ENST00000371270"
 
     } else if (params.gene=='cyp2e1') {
         chrom = "chr10"
 	region_a1 = "chr10:133517350-133549100"
 	region_a2 = "133517350-133549100"
-	region_b1 = "chr10:133526050-133537800"
-	region_b2 = "133526050-133537800"
+	region_b1 = "chr10:133522363-133544123"
+	region_b2 = "133522363-133544123"
+	transcript = "ENST00000252945"
 
     } else if (params.gene=='cyp3a4') {
         chrom = "chr7"
@@ -278,6 +285,7 @@ if (params.build=='b37') {
 	region_a2 = "099746950-099794100"
 	region_b1 = "chr7:99757850-99784950"
 	region_b2 = "099757850-099784950"
+	transcript = "ENST00000651514"
 
     } else if (params.gene=='cyp3a5') {	
         chrom = "chr7"
@@ -285,6 +293,7 @@ if (params.build=='b37') {
 	region_a2 = "099638200-099690000"
 	region_b1 = "chr7:99648250-99680650"	
 	region_b2 = "099648250-099680650"
+	transcript = "ENST00000222982"
 
     } else if (params.gene=='cyp1a1') {
         chrom = "chr15"
@@ -292,6 +301,7 @@ if (params.build=='b37') {
 	region_a2 = "074709550-074735500"
 	region_b1 = "chr15:74719250-74725500"
 	region_b2 = "074719250-074725500"
+	transcript = "ENST00000379727"
 
     } else if (params.gene=='cyp1a2') {
         chrom = "chr15"
@@ -299,7 +309,7 @@ if (params.build=='b37') {
 	region_a2 = "074738850-074766600"
 	region_b1 = "chr15:74745850-74755280"
 	region_b2 = "074745850-074755280"
-
+	transcript = "ENST00000343932"
 
     } else if (params.gene=='cyp4f2') {
         chrom = "chr19"
@@ -307,6 +317,7 @@ if (params.build=='b37') {
 	region_a2 = "015868100-015908000"
 	region_b1 = "chr19:15878000-15898100"
 	region_b2 = "015878000-015898100"
+	transcript = "ENST00000221700"
 
     } else if (params.gene=='cypor') {
        chrom = "chr7"
@@ -314,6 +325,15 @@ if (params.build=='b37') {
        region_a2 = "075905155-075996855"
        region_b1 = "chr7:75910155-75991855"
        region_b2 = "075910155-075991855"
+       transcript = "ENST00000461988"
+
+    } else if (params.gene=='nat1') {
+       chrom = "chr8"
+       region_a1 = "chr8:18170000-18226000"
+       region_a2 = "018170000-018226000"
+       region_b1 = "chr8:18221000-18224000"
+       region_b2 = "018221000-018224000"
+       transcript = "ENST00000307719"
 
     } else if (params.gene=='nat2') {
        chrom = "chr8"
@@ -322,6 +342,55 @@ if (params.build=='b37') {
        region_b1 = "chr8:18386000-18402000"
        region_b2 = "018386000-018402000"
        transcript = "ENST00000286479"
+
+    } else if (params.gene=='gstm1') {
+       chrom = "chr1"
+       region_a1 = "chr1:109687000-109695000"
+       region_a2 = "109687000-109695000"
+       region_b1 = "chr1:109687000-109695000"
+       region_b2 = "109687000-109695000"
+       transcript = "ENST00000309851"
+
+    } else if (params.gene=='gstt1') {
+       chrom = "chr22_KI270879v1_alt"
+       region_a1 = "chr22_KI270879v1_alt:269000-280000"
+       region_a2 = "000269000-000280000"
+       region_b1 = "chr22_KI270879v1_alt:269000-280000"
+       region_b2 = "000269000-000280000"
+       transcript = "ENST00000612885"
+
+    }  else if (params.gene=='slco1b1') {
+       chrom = "chr12"
+       region_a1 = "chr12:21120000-21250000"
+       region_a2 = "021120000-021250000"
+       region_b1 = "chr12:21120000-21250000"
+       region_b2 = "021120000-021250000"
+       transcript = "ENST00000256958"
+       
+    }  else if (params.gene=='nudt15') {
+       chrom = "chr13"
+       region_a1 = "chr13:48037500-48055000"
+       region_a2 = "048037500-048055000"
+       region_b1 = "chr13:48037500-48055000"
+       region_b2 = "048037500-048055000"
+       transcript = "ENST00000258662"
+
+    }  else if (params.gene=='tpmt') {
+       chrom = "chr6"
+       region_a1 = "chr6:18128000-18155500"
+       region_a2 = "018128000-018155500"
+       region_b1 = "chr6:18128500-18155000"
+       region_b2 = "018128500-018155000"
+       transcript = "ENST00000309983"
+
+    }  else if (params.gene=='ugt1a1') {
+       chrom = "chr2"
+       region_a1 = "chr2:233758500-233772600"
+       region_a2 = "233758500-233772600"
+       region_b1 = "chr2:233759000-233772000"
+       region_b2 = "233759000-233772000"
+       transcript = "ENST00000305208"
+
     }
 
 
@@ -342,26 +411,52 @@ if (params.format=='compressed') {
 }
 
 
-align_file = Channel.fromFilePairs(params.in_bam, type: 'file') {  file -> file.name.replaceAll(/.${ext}|.${ind}$/,'') }
+// align_file = Channel.fromFilePairs(params.in_bam, type: 'file') {  file -> file.name.replaceAll(/.${ext}|.${ind}$/,'') }
 
-align_file.into { data1; data2; data3; data4; data5; data6 }
+// align_file.into { data1; data2; data3; data4; data5 }
 
 
 ref_dir_val = new File("${params.ref_file}").getParent()
 ref_genome = new File("${params.ref_file}").getName()
 
+workflow {
+    ref_ch = Channel.value("${ref_dir_val}")
+    data_ch = Channel.fromFilePairs(params.in_bam, type: 'file') {  file -> file.name.replaceAll(/.${ext}|.${ind}$/,'') }
+    call_snvs1(data_ch, ref_ch, res_dir)
+    call_snvs2(data_ch, ref_ch)
+    call_sv_del(data_ch, ref_ch, res_dir)
+    call_sv_dup(data_ch, ref_ch, res_dir)
+    get_depth(data_ch, ref_ch, res_dir)
+    call_snvs1.out.join(call_snvs2.out).set {var_ch_joined}
+    format_snvs(var_ch_joined)
+    save_vcfs(format_snvs.out)
+    get_core_var(format_snvs.out, res_dir, res_base, ref_ch, caller_base)
+    get_core_var.out.join(data_ch).set {phase_ch}
+    phase_snvs(phase_ch, ref_ch)
+    analyse_1(call_sv_del.out)
+    call_sv_dup.out.join(get_core_var.out).set {dup_int}
+    analyse_2(dup_int)
+    format_snvs.out.join(get_core_var.out).set {dip_req}
+    analyse_3(dip_req)
+    analyse4(phase_snvs.out)
+    analyse_3.out.join(analyse_1.out).set {fin_files1}
+    fin_files1.join(analyse_2.out).set {fin_files2}
+    fin_files2.join(get_depth.out).set {fin_files3}
+    fin_files3.join(analyse4.out).set {fin_files}
+    call_stars(fin_files, db, caller_dir)
+}
 
 
 process call_snvs1 {
 //   maxForks 10
 
     input:
-    set val(name), file(bam) from data1
-    path ref_dir from Channel.value("${ref_dir_val}")
+    tuple val(name), path(bam)
+    path ref_dir
     path res_dir
 
     output:	        
-    set val(name), path("${name}_var_1") into var_ch1
+    tuple val(name), path("${name}_var_1")
       
     script:
     ext1 = bam[0].getExtension()
@@ -392,11 +487,11 @@ process call_snvs2 {
 //   maxForks 10
 
     input:
-    set val(name), file(bam) from data2
-    path ref_dir from Channel.value("${ref_dir_val}")
+    tuple val(name), path(bam)
+    path ref_dir
 
     output: 
-    set val(name), path("${name}_var_2") into var_ch2
+    tuple val(name), path("${name}_var_2")
 
     script:
     ext1 = bam[0].getExtension()
@@ -427,12 +522,12 @@ process call_sv_del {
 //   maxForks 10
 
     input:
-    set val(name), file(bam) from data3
-    path ref_dir from Channel.value("${ref_dir_val}")
+    tuple val(name), path(bam)
+    path ref_dir
     path res_dir
 
     output:
-    set val(name), path("${name}_sv_del") into sv_ch1
+    tuple val(name), path("${name}_sv_del") 
 
     script:
     ext1 = bam[0].getExtension()
@@ -449,7 +544,7 @@ process call_sv_del {
         sam_ind='bai'
       
     """
-    graphtyper genotype_sv ${ref_dir}/${ref_genome} --sam=${name}.${ext} --region=${region_a1} --output=${name}_sv_del ${res_dir}/sv_test.vcf.gz
+    graphtyper genotype_sv ${ref_dir}/${ref_genome} --sam=${name}.${ext} --region=${region_a1} --output=${name}_sv_del ${res_dir}/sv_test.vcf.gz 
 
     """
 
@@ -459,12 +554,12 @@ process call_sv_dup {
 //   maxForks 10
 
     input:
-    set val(name), file(bam) from data4
-    path ref_dir from Channel.value("${ref_dir_val}")
+    tuple val(name), path(bam)
+    path ref_dir
     path res_dir
 
     output:
-    set val(name), path("${name}_sv_dup") into sv_ch2
+    tuple val(name), path("${name}_sv_dup") 
 
     script:
     ext1 = bam[0].getExtension()
@@ -481,7 +576,7 @@ process call_sv_dup {
         sam_ind='bai'  
 
     """
-    graphtyper genotype_sv ${ref_dir}/${ref_genome} --sam=${name}.${ext} --region=${region_a1} --output=${name}_sv_dup ${res_dir}/sv_test3.vcf.gz
+    graphtyper genotype_sv ${ref_dir}/${ref_genome} --sam=${name}.${ext} --region=${region_a1} --output=${name}_sv_dup ${res_dir}/sv_test3.vcf.gz 
 
     """
 }
@@ -491,12 +586,12 @@ process get_depth {
 //   maxForks 10
 
     input:
-    set val(name), file(bam) from data5
-    path ref_dir from Channel.value("${ref_dir_val}")
+    tuple val(name), path(bam)
+    path ref_dir
     path res_dir
 
     output:
-    set val(name), file("${name}_${gene_name}_ctrl.depth") into sv_ch3
+    tuple val(name), path("${name}_${gene_name}_ctrl.depth")
 
     script:
 
@@ -508,21 +603,16 @@ process get_depth {
 }
 
 
-var_ch1.join(var_ch2).set { var_ch_joined }
-
-
 process format_snvs {
 //   maxForks 10
 
-    publishDir "$output_folder/$gene_name/variants", pattern: '*vcf.gz', mode: 'copy', overwrite: 'true'
-    publishDir "$output_folder/$gene_name/variants", pattern: '*vcf.gz.tbi', mode: 'copy', overwrite: 'true'    
+//    publishDir "$output_folder/$gene_name/variants", mode: 'copy', overwrite: 'true', saveAs: { ${name}_var/${name}_all_norm.vcf.gz -> "${name}_${gene_name}.vcf.gz" }
 
     input:
-    set val(name), path("${name}_var_1"), path("${name}_var_2") from var_ch_joined
+    tuple val(name), path("${name}_var_1"), path("${name}_var_2")
 
     output:
-    set val(name), path("${name}_var") into (var_norm1, var_norm2)
-    set val(name), file("${name}_${gene_name}.vcf.gz"), file("${name}_${gene_name}.vcf.gz.tbi") into var_norm3
+    tuple val(name), path("*")
 
     script:
 
@@ -532,13 +622,33 @@ process format_snvs {
         tabix ${name}_var/${name}_${region_b2}.vcf.gz
         bcftools norm -m - ${name}_var/${name}_${region_b2}.vcf.gz | bcftools view -e 'GT="1/0"' | bcftools view -e 'GT="0/0"' | bcftools view -e 'FILTER="PASS" & INFO/QD<10 || 0<ABHet<0.25' | bgzip -c > ${name}_var/${name}_all_norm.vcf.gz
         tabix ${name}_var/${name}_all_norm.vcf.gz
-	cp ${name}_var/${name}_all_norm.vcf.gz ./${name}_${gene_name}.vcf.gz
-	cp ${name}_var/${name}_all_norm.vcf.gz.tbi ./${name}_${gene_name}.vcf.gz.tbi
 
     """
 
 }
 
+
+process save_vcfs {
+
+    publishDir "$output_folder/$gene_name/variants", pattern: '*vcf.gz', mode: 'copy', overwrite: 'true'
+    publishDir "$output_folder/$gene_name/variants", pattern: '*vcf.gz.tbi', mode: 'copy', overwrite: 'true'
+
+    errorStrategy 'ignore'
+    tag "${name}"
+
+    input:
+    tuple val(name), path("${name}_vars")
+
+    output:
+    tuple val(name), path("*")
+
+    script:
+    """
+    cp ${name}_vars/${name}_all_norm.vcf.gz ./${name}_${gene_name}.vcf.gz
+    cp ${name}_vars/${name}_all_norm.vcf.gz.tbi ./${name}_${gene_name}.vcf.gz.tbi
+    """
+
+}
 
 process get_core_var {
 //   maxForks 10
@@ -547,15 +657,17 @@ process get_core_var {
     tag "${name}"   
 
     input:
-    set val(name), path("${name}_vars") from var_norm1
+    tuple val(name), path("${name}_vars")
     path res_dir
-    path ref_dir from Channel.value("${ref_dir_val}")
+    path res_base
+    path ref_dir
+    path caller_base
 
     output:
-    set val(name), path("${name}_int") into (core_vars1, core_vars2, core_vars3)
+    tuple val(name), path("${name}_int")
 
     script:
-
+ 
     if (params.build=='b37') {
 
     """
@@ -575,23 +687,23 @@ process get_core_var {
     } else {
 
     """
-    bcftools isec ${name}_vars/${name}_all_norm.vcf.gz ${res_dir}/allele_def_var.vcf.gz -p ${name}_int -Oz
-    bcftools norm -m - ${name}_int/0002.vcf.gz | bcftools view -e 'GT="1/0"' | bcftools view -e 'GT="0/0"' > ${name}_int/${name}_core_int1.vcf
-    bcftools csq -p m -v 0 -f ${ref_dir}/${ref_genome} -g ${res_base}/annotation/Homo_sapiens.GRCh38.110.gff3.gz ${name}_int/0000.vcf.gz -o ${name}_int/0000_annot.vcf
+    bcftools csq -p m -v 0 -f ${ref_dir}/${ref_genome} -g ${res_base}/annotation/Homo_sapiens.GRCh38.110.gff3.gz ${name}_vars/${name}_all_norm.vcf.gz -o ${name}_vars/${name}_all_norm_annot.vcf
+    bgzip ${name}_vars/${name}_all_norm_annot.vcf
+    tabix ${name}_vars/${name}_all_norm_annot.vcf.gz
 
-    python3 ${caller_base}/novel/core_var.py ${name}_int/0000_annot.vcf ${up_gene_symbol} ${transcript} >> ${name}_int/${name}_core_int1.vcf
+    bcftools isec ${name}_vars/${name}_all_norm_annot.vcf.gz ${res_dir}/allele_def_var.vcf.gz -p ${name}_int -Oz
+    bcftools norm -m - ${name}_int/0002.vcf.gz | bcftools view -e 'GT="1/0"' | bcftools view -e 'GT="0/0"' > ${name}_int/${name}_core_int1.vcf
+    
+    bgzip -d ${name}_int/0000.vcf.gz
+    python3 ${caller_base}/novel/core_var.py ${name}_int/0000.vcf ${up_gene_symbol} ${transcript} >> ${name}_int/${name}_core_int1.vcf
     bcftools sort ${name}_int/${name}_core_int1.vcf -T ${name}_int | bgzip -c > ${name}_int/${name}_core.vcf.gz
     tabix ${name}_int/${name}_core.vcf.gz
 
     """
     }
-
 }
 
 
-core_vars3.join(data6)
-.set { phase_ch }
-    
 process phase_snvs {
     label 'phase'    
 
@@ -601,11 +713,11 @@ process phase_snvs {
     // publishDir "$output_folder/phased_vcfs", mode: 'copy', overwrite: 'true'
 
     input:
-    set val(name), path("${name}_int1"), file(bam) from phase_ch
-    path ref_dir from Channel.value("${ref_dir_val}")
+    tuple val(name), path("${name}_int1"), path(bam)
+    path ref_dir
 
     output:
-    set val(name), file("${name}_${gene_name}_phased.vcf.gz") into phased_ch
+    tuple val(name), path("${name}_${gene_name}_phased.vcf.gz")
 
     script:
 
@@ -615,7 +727,6 @@ process phase_snvs {
     """
 }
 
-
 process analyse_1 {
 //   maxForks 10
 
@@ -623,10 +734,10 @@ process analyse_1 {
     tag "${name}"
 
     input:
-    set val(name), path("${name}_gene_del") from sv_ch1
+    tuple val(name), path("${name}_gene_del")
 
     output:
-    set val(name), path("${name}_gene_del/${name}_gene_del_summary.txt") into del_ch
+    tuple val(name), path("${name}_gene_del/${name}_gene_del_summary.txt") 
 
     script:
 
@@ -637,8 +748,6 @@ process analyse_1 {
 }
 
 
-sv_ch2.join(core_vars1).set {dup_int}
-
 process analyse_2 {
 //   maxForks 10
 
@@ -646,10 +755,10 @@ process analyse_2 {
     tag "${name}"
 
     input:
-    set val(name), path("${name}_gene_dup"), path("${name}_int") from dup_int
+    tuple val(name), path("${name}_gene_dup"), path("${name}_int") 
 
     output:
-    set val(name), path("${name}_gene_dup/${name}_gene_dup_summary.txt") into dup_ch
+    tuple val(name), path("${name}_gene_dup/${name}_gene_dup_summary.txt") 
 
     script:
 
@@ -662,8 +771,6 @@ process analyse_2 {
 }
 
 
-var_norm2.join(core_vars2).set {dip_req}
-
 process analyse_3 {
 //   maxForks 10
 
@@ -671,10 +778,10 @@ process analyse_3 {
     tag "${name}"
 
     input:
-    set val(name), path("${name}_vars"), path("${name}_int") from dip_req
+    tuple val(name), path("${name}_vars"), path("${name}_int") 
 
     output:
-    set val(name), path("${name}_vars/${name}_core_snvs.dip"), path("${name}_vars/${name}_full.dip"), path("${name}_vars/${name}_gt.dip") into prep_ch
+    tuple val(name), path("${name}_vars/${name}_core_snvs.dip"), path("${name}_vars/${name}_full.dip"), path("${name}_vars/${name}_gt.dip") 
 
     script:
     """
@@ -693,10 +800,10 @@ process analyse_4 {
     tag "${name}"
 
     input:
-    set val(name), file(phased_vcf) from phased_ch
+    tuple val(name), path(phased_vcf)
 
     output:
-    set val(name), file("${name}_${gene_name}_hap_snvs.dip") into hap_snvs_ch
+    tuple val(name), path("${name}_${gene_name}_hap_snvs.dip") 
 
     script:
     """
@@ -705,14 +812,7 @@ process analyse_4 {
     bcftools query -e 'GT="1|0" || GT="0/1"' -f'[%POS~%REF>%ALT;]' ${phased_vcf} | rev | cut -d";" -f2- | rev >> ${name}_${gene_name}_hap_snvs.dip
     """
 
-
 }
-
-
-prep_ch.join(del_ch).set {fin_files1}
-fin_files1.join(dup_ch).set {fin_files2}
-fin_files2.join(sv_ch3).set {fin_files3}
-fin_files3.join(hap_snvs_ch).set {fin_files}
 
 
 process call_stars {
@@ -724,12 +824,12 @@ process call_stars {
     tag "${name}"
 
     input:
-    set val(name), path("${name}_vars/${name}_core_snvs.dip"), path("${name}_vars/${name}_full.dip"), path("${name}_vars/${name}_gt.dip"), path("${name}_gene_del/${name}_gene_del_summary.txt"), path("${name}_gene_dup/${name}_gene_dup_summary.txt"), file("${name}_${gene_name}_dp"), file("${name}_${gene_name}_hap_snvs.dip") from fin_files
+    tuple val(name), path("${name}_vars/${name}_core_snvs.dip"), path("${name}_vars/${name}_full.dip"), path("${name}_vars/${name}_gt.dip"), path("${name}_gene_del/${name}_gene_del_summary.txt"), path("${name}_gene_dup/${name}_gene_dup_summary.txt"), path("${name}_${gene_name}_dp"), path("${name}_${gene_name}_hap_snvs.dip")
     path db
     path caller_dir
 
     output:
-    set val(name), file("${name}_${gene_name}.alleles") into star_ch
+    tuple val(name), path("${name}_${gene_name}.alleles")
 
     script:
    
