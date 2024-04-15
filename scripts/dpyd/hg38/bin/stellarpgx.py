@@ -18,6 +18,24 @@ infile = sys.argv[1]
 cov_file = sys.argv[2]
 
 
+
+def get_core_variants(infile, cn):
+    core_vars = []
+    for line in open(infile, "r"):
+        line = line.strip()
+        core_vars.append(line)
+    core_vars = ";".join(sorted(core_vars))
+
+    if int(cn) == 1:
+        core_vars = core_vars.replace("~0/1", "~1/1")
+
+    if os.stat(infile).st_size == 0:
+        core_vars = "No core SNVs detected; haplotypes equivalent to GRCh38"
+
+    return core_vars
+
+
+
 cn = get_total_CN(cov_file)[0]
 
 exon_cov = get_total_CN(cov_file)[3]
@@ -35,20 +53,4 @@ supp_core_vars = get_core_variants(infile, cn)
 
 print("\nSample core variants:")
 print(supp_core_vars)
-
-def get_core_variants(infile, cn):
-    core_vars = []
-    for line in open(infile, "r"):
-        line = line.strip()
-        core_vars.append(line)
-    core_vars = ";".join(sorted(core_vars))
-
-    if int(cn) == 1:
-        core_vars = core_vars.replace("~0/1", "~1/1")
-
-    if os.stat(infile).st_size == 0:
-        core_vars = "No core SNVs detected; haplotypes equivalent to GRCh38"
-
-    return core_vars
-
 
