@@ -33,5 +33,5 @@ def get_total_CN(cov_file):
     total_cn = round(temp_cn)
 
 
-    return [str(int(total_cn)), round(av_dpyd_cov), round(av_ctrl_cov)], exon_cov_list]; 
+    return [str(int(total_cn)), round(av_dpyd_cov), round(av_ctrl_cov), exon_cov_list]; 
 
