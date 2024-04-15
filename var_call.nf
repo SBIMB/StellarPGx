@@ -391,9 +391,13 @@ if (params.build=='b37') {
        region_b2 = "233759000-233772000"
        transcript = "ENST00000305208"
 
-    }
-
-
+    }  else if (params.gene=='dpyd') {
+       chrom = "chr1"
+       region_a1 = "chr1:97072500-97926000"
+       region_a2 = "097072500-097926000"
+       region_b1 = "chr1:97072500-97926000"
+       region_b2 = "097072500-097926000"
+       transcript = "ENST00000370192"
 }
 
 params.format='binary'
@@ -419,13 +423,13 @@ workflow {
     data_ch = Channel.fromFilePairs(params.in_bam, type: 'file') {  file -> file.name.replaceAll(/.${ext}|.${ind}$/,'') }
     call_snvs1(data_ch, ref_ch, res_dir)
     call_snvs2(data_ch, ref_ch)
-    call_sv_del(data_ch, ref_ch, res_dir)
-    call_sv_dup(data_ch, ref_ch, res_dir)
     get_depth(data_ch, ref_ch, res_dir)
     call_snvs1.out.join(call_snvs2.out).set {var_ch_joined}
     format_snvs(var_ch_joined)
     save_vcfs(format_snvs.out)
     get_core_var(format_snvs.out, res_dir, res_base, ref_ch, caller_base)
+    get_core_var.out.join(get_depth.out).set {fin_files}
+    analyse(fin_files, caller_dir)
 }
 
 
@@ -623,6 +627,26 @@ process get_core_var {
 
 
 
+process analyse {
 
+    publishDir "$output_folder/$gene_name/output", mode: 'copy', overwrite: 'true'
 
+    errorStrategy 'ignore'
+    tag "${name}"
 
+    input:
+    tuple val(name), path("${name}_int"), path("${name}_${gene_name}_dp")
+    path caller_dir
+
+    output:
+    tuple val(name), file("${name}_${gene_name}.info")
+
+    script:
+   
+    """
+    bcftools query -f'[%POS~%REF>%ALT~%GT\n]' ${name}_int/${name}_core.vcf.gz > ${name}_core_snvs.dip
+    python3 ${caller_dir}/stellarpgx.py ${name}_core_snvs.dip ${name}_${gene_name}_dp > ${name}_${gene_name}.info
+
+    """
+
+}
