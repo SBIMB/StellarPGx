@@ -630,7 +630,7 @@ process get_core_var {
 
 process analyse {
 
-    publishDir "$output_folder/$gene_name/output", mode: 'copy', overwrite: 'true'
+    publishDir "$output_folder/$gene_name/summary", pattern: '.info', mode: 'copy', overwrite: 'true'
 
     errorStrategy 'ignore'
     tag "${name}"
