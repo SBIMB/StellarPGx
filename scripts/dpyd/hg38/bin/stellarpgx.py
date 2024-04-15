@@ -21,10 +21,12 @@ cov_file = sys.argv[2]
 cn = get_total_CN(cov_file)[0]
 
 exon_cov = get_total_CN(cov_file)[3]
+av_ctrl_cov = get_total_CN(cov_file)[2]
+print(get_total_CN(cov_file))
 
 print("Initially computed Copy Number = {}".format(cn))
 
-if exon_cov[3]/(sum(exon_cov[4:])/len(exon_cov[4:])) < 0.45 :
+if exon_cov[3]/av_ctrl_cov < 0.45 :
     print ('Check exon 4 for potential deletion if using high coverage WGS')
 else:
     pass
