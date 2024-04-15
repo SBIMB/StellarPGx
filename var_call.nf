@@ -398,6 +398,7 @@ if (params.build=='b37') {
        region_b1 = "chr1:97072500-97926000"
        region_b2 = "097072500-097926000"
        transcript = "ENST00000370192"
+    }
 }
 
 params.format='binary'
@@ -539,11 +540,11 @@ process format_snvs {
     script:
 
     """
-        bcftools isec -p ${name}_var -Oz ${name}_var_1/${chrom}/${region_a2}.vcf.gz ${name}_var_2/${chrom}/${region_a2}.vcf.gz
-        bcftools concat -a -D -r ${region_b1} ${name}_var/0000.vcf.gz ${name}_var/0001.vcf.gz ${name}_var/0002.vcf.gz -Oz -o ${name}_var/${name}_${region_b2}.vcf.gz
-        tabix ${name}_var/${name}_${region_b2}.vcf.gz
-        bcftools norm -m - ${name}_var/${name}_${region_b2}.vcf.gz | bcftools view -e 'GT="1/0"' | bcftools view -e 'GT="0/0"' | bcftools view -e 'FILTER="PASS" & INFO/QD<10 || 0<ABHet<0.25' | bgzip -c > ${name}_var/${name}_all_norm.vcf.gz
-        tabix ${name}_var/${name}_all_norm.vcf.gz
+    bcftools isec -p ${name}_var -Oz ${name}_var_1/${chrom}/${region_a2}.vcf.gz ${name}_var_2/${chrom}/${region_a2}.vcf.gz
+    bcftools concat -a -D -r ${region_b1} ${name}_var/0000.vcf.gz ${name}_var/0001.vcf.gz ${name}_var/0002.vcf.gz -Oz -o ${name}_var/${name}_${region_b2}.vcf.gz
+    tabix ${name}_var/${name}_${region_b2}.vcf.gz
+    bcftools norm -m - ${name}_var/${name}_${region_b2}.vcf.gz | bcftools view -e 'GT="1/0"' | bcftools view -e 'GT="0/0"' | bcftools view -e 'FILTER="PASS" & INFO/QD<10 || 0<ABHet<0.25' | bgzip -c > ${name}_var/${name}_all_norm.vcf.gz
+    tabix ${name}_var/${name}_all_norm.vcf.gz
 
     """
 
@@ -650,3 +651,4 @@ process analyse {
     """
 
 }
+
