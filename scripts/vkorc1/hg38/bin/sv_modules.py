@@ -28,7 +28,7 @@ def get_total_CN(cov_file):
         
     av_ctrl_cov = (av_vdr_cov + av_egfr_cov)/2
 
-    comp_av = av_nat1_cov/av_ctrl_cov
+    comp_av = av_vkorc1_cov/av_ctrl_cov
     temp_cn = 2 * comp_av
     total_cn = round(temp_cn)
 
