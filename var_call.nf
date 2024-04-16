@@ -401,10 +401,10 @@ if (params.build=='b37') {
 
     }  else if (params.gene=='vkorc1') {
        chrom = "chr16"
-       region_a1 = "chr16:31040000-31099000"
-       region_a2 = "031040000-031099000"
-       region_b1 = "chr16:31040000-31099000"
-       region_b2 = "031040000-031099000"
+       region_a1 = "chr16:31086000-31099000"
+       region_a2 = "031086000-031099000"
+       region_b1 = "chr16:31086000-31099000"
+       region_b2 = "031086000-031099000"
        transcript = "ENST00000394975"
     }
 
