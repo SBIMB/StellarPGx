@@ -406,9 +406,135 @@ if (params.build=='b37') {
        region_b1 = "chr16:31086000-31099000"
        region_b2 = "031086000-031099000"
        transcript = "ENST00000394975"
+
+    }  else if (params.gene=='g6pd') {
+       chrom = "chrX"
+       region_a1 = "chrX:154526000-154552000"
+       region_a2 = "154526000-154552000"
+       region_b1 = "chrX:154526000-154552000"
+       region_b2 = "154526000-154552000"
+       transcript = "ENST00000393562"
+
+    } else if (params.gene=='sult1a1') {
+       chrom = "chr16"
+       region_a1 = "chr16:28600000-28628000"
+       region_a2 = "028600000-028628000"
+       region_b1 = "chr16:28600000-28628000"
+       region_b2 = "028600000-028628000"
+       transcript = "ENST00000314752"
+
+    } else if (params.gene=='comt') {
+       chrom = "chr22"
+       region_a1 = "chr22:19936772-19974975"
+       region_a2 = "019936772-019974975"
+       region_b1 = "chr22:19936772-19974975"
+       region_b2 = "019936772-019974975"
+       transcript = "ENST00000361682"
+
+    } else if (params.gene=='gstp1') {
+       chrom = "chr11"
+       region_a1 = "chr11:67578812-67591653"
+       region_a2 = "067578812-067591653"
+       region_b1 = "chr11:67578812-67591653"
+       region_b2 = "067578812-067591653"
+       transcript = "ENST00000398606"
+
+    } else if (params.gene=='abcb1') {
+       chrom = "chr7"
+       region_a1 = "chr7:87498017-87718295"
+       region_a2 = "087498017-087718295"
+       region_b1 = "chr7:87498017-87718295"
+       region_b2 = "087498017-087718295"
+       transcript = "ENST00000622132"
+
+    } else if (params.gene=='abcg2') {
+       chrom = "chr4"
+       region_a1 = "chr4:88085264-88236626"
+       region_a2 = "088085264-088236626"
+       region_b1 = "chr4:88085264-88236626"
+       region_b2 = "088085264-088236626"
+       transcript = "ENST00000237612"
+
+    } else if (params.gene=='slc22a1') {
+       chrom = "chr6"
+       region_a1 = "chr6:160116815-160163718"
+       region_a2 = "160116815-160163718"
+       region_b1 = "chr6:160116815-160163718"    
+       region_b2 = "160116815-160163718"
+       transcript = "ENST00000366963"
+
+    } else if (params.gene=='slc22a2') {
+       chrom = "chr6"
+       region_a1 = "chr6:160211755-160263821"
+       region_a2 = "160211755-160263821"
+       region_b1 = "chr6:160211755-160263821"
+       region_b2 = "160211755-160263821"
+       transcript = "ENST00000366953"
+
+    } else if (params.gene=='slc22a6') {
+       chrom = "chr11"
+       region_a1 = "chr11:62971597-62989967"
+       region_a2 = "062971597-062989967"
+       region_b1 = "chr11:62971597-62989967"
+       region_b2 = "062971597-062989967"
+       transcript = "ENST00000360421"
+
+    } else if (params.gene=='slc6a4') {
+       chrom = "chr17"
+       region_a1 = "chr17:30189319-30240697"
+       region_a2 = "030189319-030240697"
+       region_b1 = "chr17:30189319-30240697"
+       region_b2 = "030189319-030240697"
+       transcript = "ENST00000650711"
+
+    } else if (params.gene=='hla-b') {
+       chrom = "chr6"
+       region_a1 = "chr6:31348875-31362179"
+       region_a2 = "031348875-031362179"
+       region_b1 = "chr6:31348875-31362179"
+       region_b2 = "031348875-031362179"
+       transcript = "ENST00000359635"
+
+    }  else if (params.gene=='slc15a2') {
+       chrom = "chr3"
+       region_a1 = "chr3:121889401-121949188"
+       region_a2 = "121889401-121949188"
+       region_b1 = "chr3:121889401-121949188"
+       region_b2 = "121889401-121949188"
+       transcript = "ENST00000489711"
+
+    }  else if (params.gene=='slco1b3') {
+       chrom = "chr12"
+       region_a1 = "chr12:20805705-20921911"
+       region_a2 = "020805705-020921911"
+       region_b1 = "chr12:20805705-20921911"
+       region_b2 = "020805705-020921911"
+       transcript = "ENST00000381545"
+
+    }  else if (params.gene=='ugt2b7') {
+       chrom = "chr4"
+       region_a1 = "chr4:69046375-69117987"
+       region_a2 = "069046375-069117987"
+       region_b1 = "chr4:69046375-69117987"
+       region_b2 = "069046375-069117987"
+       transcript = "ENST00000305231"
+
+    }  else if (params.gene=='ugt2b15') {
+       chrom = "chr4"
+       region_a1 = "chr4:68641597-68675652"
+       region_a2 = "068641597-068675652"
+       region_b1 = "chr4:68641597-68675652"
+       region_b2 = "068641597-068675652"
+       transcript = "ENST00000338206"
+
+    }  else if (params.gene=='ugt2b17') {
+       chrom = "chr4"
+       region_a1 = "chr4:68532173-68581322"
+       region_a2 = "068532173-068581322"
+       region_b1 = "chr4:68532173-68581322"
+       region_b2 = "068532173-068581322"
+
     }
-
-
 
 }
 
