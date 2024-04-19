@@ -131,7 +131,7 @@ if cn == '2':
         
     if 'or' in snv_def_alleles:
         
-        if os.stat(infile).st_size == 0:
+        if os.stat(hap_snvs).st_size == 0:
             gene_alleles = snv_def_alleles
             print(gene_alleles)
 
