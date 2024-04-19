@@ -131,8 +131,13 @@ if cn == '2':
         
     if 'or' in snv_def_alleles:
         
-        gene_alleles = resolve_haps(hap_snvs, hap_dbs)
-        print(gene_alleles)
+        if os.stat(infile).st_size == 0:
+            gene_alleles = snv_def_alleles
+            print(gene_alleles)
+
+        else:
+            gene_alleles = resolve_haps(hap_snvs, hap_dbs)
+            print(gene_alleles)
         
     else:
         gene_alleles = snv_def_alleles
