@@ -619,9 +619,9 @@ process format_snvs {
     """
         bcftools isec -p ${name}_var -Oz ${name}_var_1/${chrom}/${region_a2}.vcf.gz ${name}_var_2/${chrom}/${region_a2}.vcf.gz
         bcftools concat -a -D -r ${region_b1} ${name}_var/0000.vcf.gz ${name}_var/0001.vcf.gz ${name}_var/0002.vcf.gz -Oz -o ${name}_var/${name}_${region_b2}.vcf.gz
-        tabix ${name}_var/${name}_${region_b2}.vcf.gz
-        bcftools norm -m - ${name}_var/${name}_${region_b2}.vcf.gz | bcftools view -e 'GT="1/0"' | bcftools view -e 'GT="0/0"' | bcftools view -e 'FILTER="PASS" & INFO/QD<10 || 0<ABHet<0.25' | bgzip -c > ${name}_var/${name}_all_norm.vcf.gz
-        tabix ${name}_var/${name}_all_norm.vcf.gz
+        tabix -f ${name}_var/${name}_${region_b2}.vcf.gz
+        bcftools norm -m - ${name}_var/${name}_${region_b2}.vcf.gz | bcftools view -e 'GT="1/0"' | bcftools view -e 'GT="0/0"' | bcftools view -e 'FILTER="PASS" & INFO/QD<10 || 0<ABHet<0.25' | bgzip -cf > ${name}_var/${name}_all_norm.vcf.gz
+        tabix -f ${name}_var/${name}_all_norm.vcf.gz
 
     """
 
@@ -672,16 +672,16 @@ process get_core_var {
 
     """
     bcftools isec ${name}_vars/${name}_all_norm.vcf.gz ${res_dir}/allele_def_var.vcf.gz -p ${name}_int -Oz
-    bcftools norm -m - ${name}_int/0002.vcf.gz | bcftools view -e 'GT="1/0"' | bcftools view -e 'GT="0/0"' | bgzip -c > ${name}_int/${name}_core.vcf.gz
-    tabix ${name}_int/${name}_core.vcf.gz
+    bcftools norm -m - ${name}_int/0002.vcf.gz | bcftools view -e 'GT="1/0"' | bcftools view -e 'GT="0/0"' | bgzip -cf > ${name}_int/${name}_core.vcf.gz
+    tabix -f ${name}_int/${name}_core.vcf.gz
     """
 
     } else if (params.build=='hg19') {
 
     """
     bcftools isec ${name}_vars/${name}_all_norm.vcf.gz ${res_dir}/allele_def_var.vcf.gz -p ${name}_int -Oz
-    bcftools norm -m - ${name}_int/0002.vcf.gz | bcftools view -e 'GT="1/0"' | bcftools view -e 'GT="0/0"' | bgzip -c > ${name}_int/${name}_core.vcf.gz
-    tabix ${name}_int/${name}_core.vcf.gz
+    bcftools norm -m - ${name}_int/0002.vcf.gz | bcftools view -e 'GT="1/0"' | bcftools view -e 'GT="0/0"' | bgzip -cf > ${name}_int/${name}_core.vcf.gz
+    tabix -f ${name}_int/${name}_core.vcf.gz
     """
 
     } else {
@@ -689,15 +689,15 @@ process get_core_var {
     """
     bcftools csq -p m -v 0 -f ${ref_dir}/${ref_genome} -g ${res_base}/annotation/Homo_sapiens.GRCh38.110.gff3.gz ${name}_vars/${name}_all_norm.vcf.gz -o ${name}_vars/${name}_all_norm_annot.vcf
     bgzip ${name}_vars/${name}_all_norm_annot.vcf
-    tabix ${name}_vars/${name}_all_norm_annot.vcf.gz
+    tabix -f ${name}_vars/${name}_all_norm_annot.vcf.gz
 
     bcftools isec ${name}_vars/${name}_all_norm_annot.vcf.gz ${res_dir}/allele_def_var.vcf.gz -p ${name}_int -Oz
     bcftools norm -m - ${name}_int/0002.vcf.gz | bcftools view -e 'GT="1/0"' | bcftools view -e 'GT="0/0"' > ${name}_int/${name}_core_int1.vcf
     
     bgzip -d ${name}_int/0000.vcf.gz
     python3 ${caller_base}/novel/core_var.py ${name}_int/0000.vcf ${up_gene_symbol} ${transcript} >> ${name}_int/${name}_core_int1.vcf
-    bcftools sort ${name}_int/${name}_core_int1.vcf -T ${name}_int | bgzip -c > ${name}_int/${name}_core.vcf.gz
-    tabix ${name}_int/${name}_core.vcf.gz
+    bcftools sort ${name}_int/${name}_core_int1.vcf -T ${name}_int | bgzip -cf > ${name}_int/${name}_core.vcf.gz
+    tabix -f ${name}_int/${name}_core.vcf.gz
 
     """
     }
@@ -807,7 +807,7 @@ process analyse_4 {
 
     script:
     """
-    tabix ${phased_vcf}
+    tabix -f ${phased_vcf}
     bcftools query -e 'GT="0|1" || GT="0/1"' -f'[%POS~%REF>%ALT;]' ${phased_vcf} | rev | cut -d";" -f2- | rev > ${name}_${gene_name}_hap_snvs.dip
     bcftools query -e 'GT="1|0" || GT="0/1"' -f'[%POS~%REF>%ALT;]' ${phased_vcf} | rev | cut -d";" -f2- | rev >> ${name}_${gene_name}_hap_snvs.dip
     """
