@@ -38,8 +38,8 @@ def cand_snv_allele_calling(database, infile, infile_full, infile_full_gt, infil
         all_variants.append(line)
 
     if os.stat(infile).st_size == 0:
-        cand_res = ['1A.v1_1A.v1']
-        allele_res = "*1A/*1A"
+        cand_res = ['1.v1_1.v1']
+        allele_res = "*1/*1"
         return ["".join(cand_res), allele_res];
         sys.exit()
 
@@ -151,61 +151,6 @@ def cand_snv_allele_calling(database, infile, infile_full, infile_full_gt, infil
                 score.append(score_dip)
 
             min_score = min(score)    
-
-
-            if chkList(score) == "Equal" and soln_list1[0] == "1A.v1_1G.v1":
-                elem = "1.v1_1.v1"
-                res1 = [i for i in range(len(elem)) if elem.startswith("_", i)]
-                res2 = [i for i in range(len(elem)) if elem.startswith(".", i)]
-                hap1 = "*" + str (elem[:res2[0]])
-                hap2 = "*" + str (elem[res1[0]+1:res2[1]])
-                result_dip = hap1 + "/" + hap2
-                return [soln_list1, elem, result_dip];
-
-            if chkList(score) == "Equal" and soln_list1[0] == "1A.v1_1J.v1":
-                elem = "1.v1_1.v1"
-                res1 = [i for i in range(len(elem)) if elem.startswith("_", i)]
-                res2 = [i for i in range(len(elem)) if elem.startswith(".", i)]
-                hap1 = "*" + str (elem[:res2[0]])
-                hap2 = "*" + str (elem[res1[0]+1:res2[1]])
-                result_dip = hap1 + "/" + hap2
-                return [soln_list1, elem, result_dip];
-
-            if chkList(score) == "Equal" and soln_list1[0] == "1A.v1_1V.v1":
-                elem = "1.v1_1.v1"
-                res1 = [i for i in range(len(elem)) if elem.startswith("_", i)]
-                res2 = [i for i in range(len(elem)) if elem.startswith(".", i)]
-                hap1 = "*" + str (elem[:res2[0]])
-                hap2 = "*" + str (elem[res1[0]+1:res2[1]])
-                result_dip = hap1 + "/" + hap2
-                return [soln_list1, elem, result_dip];
-
-            if chkList(score) == "Equal" and soln_list1[0] == "1B.v1_1J.v1":
-                elem = "1.v1_1.v1"
-                res1 = [i for i in range(len(elem)) if elem.startswith("_", i)]
-                res2 = [i for i in range(len(elem)) if elem.startswith(".", i)]
-                hap1 = "*" + str (elem[:res2[0]])
-                hap2 = "*" + str (elem[res1[0]+1:res2[1]])
-                result_dip = hap1 + "/" + hap2
-                return [soln_list1, elem, result_dip];
-
-            if chkList(score) == "Equal" and soln_list1[0] == "1B.v1_1W.v1":
-                elem = "1.v1_1.v1"
-                res1 = [i for i in range(len(elem)) if elem.startswith("_", i)]
-                res2 = [i for i in range(len(elem)) if elem.startswith(".", i)]
-                hap1 = "*" + str (elem[:res2[0]])
-                hap2 = "*" + str (elem[res1[0]+1:res2[1]])
-                result_dip = hap1 + "/" + hap2
-                return [soln_list1, elem, result_dip];
-
-            if chkList(score) == "Equal" and soln_list1[0] == "1F.v1_1W.v1":
-                elem = "1.v1_1.v1"
-                res1 = [i for i in range(len(elem)) if elem.startswith("_", i)]
-                res2 = [i for i in range(len(elem)) if elem.startswith(".", i)]
-                hap1 = "*" + str (elem[:res2[0]])
-                hap2 = "*" + str (elem[res1[0]+1:res2[1]])
-                result_dip = hap1 + "/" + hap2
-                return [soln_list1, elem, result_dip];
 
 
             if chkList(score) == "Equal":
@@ -332,17 +277,6 @@ def cand_snv_allele_calling(database, infile, infile_full, infile_full_gt, infil
                 score.append(score_dip)
 
             min_score = min(score)
-
-
-            if chkList(score) == "Equal" and soln_list1[0] == "1A.v1_1W.v1":
-                elem = "1.v1_1.v1"
-                res1 = [i for i in range(len(elem)) if elem.startswith("_", i)]
-                res2 = [i for i in range(len(elem)) if elem.startswith(".", i)]
-                hap1 = "*" + str (elem[:res2[0]])
-                hap2 = "*" + str (elem[res1[0]+1:res2[1]])
-                result_dip = hap1 + "/" + hap2
-                return [soln_list1, elem, result_dip];
-
 
         
             elif chkList(score) == "Equal":
