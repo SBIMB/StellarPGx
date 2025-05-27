@@ -279,7 +279,7 @@ def cand_snv_allele_calling(database, infile, infile_full, infile_full_gt, infil
             min_score = min(score)
 
         
-            elif chkList(score) == "Equal":
+            if chkList(score) == "Equal":
                 amb_soln_set = []
                 for elem in tiebreak1:
                     res1 = [i for i in range(len(elem)) if elem.startswith("_", i)]
