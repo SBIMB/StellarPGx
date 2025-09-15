@@ -24,9 +24,9 @@ infile_spec = sys.argv[5]
 sv_del = sys.argv[6]
 sv_dup = sys.argv[7]
 cov_file = sys.argv[8]
-hap_snvs = sys.argv[9]
-hap_dbs = sys.argv[10]
-act_score = sys.argv[11]
+hap_dbs = sys.argv[9]
+act_score = sys.argv[10]
+
 
 cn = get_total_CN(cov_file)[0]
 
@@ -61,20 +61,12 @@ if snv_def_calls == None:
 
     sys.exit()
 
-
-
-best_diplos = snv_def_calls[0]
+else:
+    snv_cand_alleles = snv_def_calls[0]
+    snv_def_alleles = snv_def_calls[-1]
 
 print("\nCandidate alleles:")
-print(best_diplos)
-
-
-snv_def_alleles = snv_def_calls[-1]
-
-if "or" in snv_def_alleles:
-    pass
-else:
-    snv_cand_alleles = snv_def_calls[1]
+print(snv_cand_alleles)
 
 
 dip_variants = get_all_vars_gt(infile_full_gt)
@@ -82,6 +74,7 @@ dip_variants = get_all_vars_gt(infile_full_gt)
 
 print("\nResult:")
 
+# print(snv_def_alleles)
 
 av_cov = get_total_CN(cov_file)[1]
 
@@ -92,53 +85,12 @@ gene_alleles = ""
 if snv_def_alleles != '*1/*1' and cn != '0':
     in_list = dup_test_init(sv_dup, av_cov)
 
-
-def resolve_haps (hap_snvs_file, hap_dbs_file):
-    haps = []
-    hap_info = []
     
-    for hap in open(hap_snvs_file, "r"):
-        hap = hap.strip() # .split(";")
-        # hap = hap[:-1]
-        # hap = ";".join(hap)
-        haps.append(hap)
-    
-    if len(haps) == 1:
-        for line in open(hap_dbs_file):
-            line = line.strip().split()
-            if line[-1] == haps[0]:
-                allele1 = line[0]
-                allele2 = "*1"
-
-            else:
-                pass
-            
-    else:
-        hap1 = haps[0]
-        hap2 = haps[1]
-
-        for line in open(hap_dbs_file):
-            line = line.strip().split()
-        
-            if line[-1] == hap1:
-                allele1 = line[0]
-            if line[-1] == hap2:
-                allele2 = line[0]
-
-    return allele1 + "/" + allele2    
-
 if cn == '2':
-        
-    if 'or' in snv_def_alleles:
-        
-        if os.stat(hap_snvs).st_size == 0:
-            gene_alleles = snv_def_alleles
-            print(gene_alleles)
 
-        else:
-            gene_alleles = resolve_haps(hap_snvs, hap_dbs)
-            print(gene_alleles)
-        
+    if 'or' in snv_def_alleles:        
+        print (snv_def_alleles)
+
     else:
         gene_alleles = snv_def_alleles
         print(gene_alleles)
@@ -189,16 +141,20 @@ elif cn == '1':
         
             if del_confirm == "*(full_gene_del)/*(full_gene_del)":
                 del_confirm = "*(full_gene_del)"
-            gene_alleles = del_confirm + "/" + snv_def_alleles[0]
-            print(gene_alleles)
+                gene_alleles = del_confirm + "/" + snv_def_alleles[0]
+                print(gene_alleles)
+
+            else:
+                gene_alleles = "*(full_gene_del)" + "/" + snv_def_alleles[0]
+                print(gene_alleles)
 
         elif snv_def_alleles[0] != snv_def_alleles[1]:
             samp_allele1 = del_adv_test(hap_dbs, snv_cand_alleles[0], snv_cand_alleles[1], snv_def_alleles[0], snv_def_alleles[1], supp_core_vars)
     
-            if del_confirm == "*(full_gene_del)/*(full_gene_del)":
+            if del_confirm == "*(full_gene_del)/*(full_gene_del)" or del_confirm == "*(full_gene_del)":
                 del_confirm = "*(full_gene_del)"
-            gene_alleles = del_confirm + "/" + samp_allele1
-            print(gene_alleles)
+                gene_alleles = del_confirm + "/" + samp_allele1
+                print(gene_alleles)
 
 
 
@@ -207,7 +163,7 @@ elif (int(cn) == 3 or int(cn) == 4) and snv_def_alleles != None:
     orig = snv_def_alleles
 
     if "or" in snv_def_alleles:
-        print (snv_def_alleles + "\t" + "Duplication present")
+        print (snv_def_alleles + "\n" + "(Duplication present)")
 
     else:
         snv_def_alleles = snv_def_alleles.split("/")
